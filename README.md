@@ -62,3 +62,14 @@ Resource Management: track fictional “hobbit resources” (food, supplies, mor
 Decision Support: flows and logic for key choices on the journey
 Communication: share work, reflections, and AI learnings
 Versioned & Evolving: artifacts build on each other, tracked in The Red Book
+
+Changelog
+This is our general changelog (e.g., new chapter contents added, rules changed, or major system revisions).
+
+Each chapter has its own detailed changelog for chapter-specific updates.
+
+Adapt to your project...
+
+X
+Y
+Z
