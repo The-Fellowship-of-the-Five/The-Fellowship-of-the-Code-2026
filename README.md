@@ -26,11 +26,12 @@ An App that tracks our Inventory, calculates shopping lists, warns of us nearby 
 Why we build it: 
 To stop buying duplicate bread, stop walking into orc camps and to make sure Sam always knows what's left to cook with. Its to improve current and future adventuring situations and keeping the Fellowship coordinated without having to shout across the wilderness.
 
-Rules of our Journey
-All artifacts live in this GitHub repo.
-Gandalf (the AI) is our companion: we may ask him for help, but we always reflect on our decisions in The Red Book.
-Peer sharing is optional but highly recommended: it keeps the Fellowship alive.
-The Red Book of Westmark (README.md + chapters/) is our reflection log and living changelog.
+Rules of our Journey:
+
+- All artifacts live in this GitHub repo.
+- Gandalf (the AI) is our companion: we may ask him for help, but we always reflect on our decisions in The Red Book.
+- Peer sharing is optional but highly recommended: it keeps the Fellowship alive.
+- The Red Book of Westmark (README.md + chapters/) is our reflection log and living changelog.
 
 Chapters
 
