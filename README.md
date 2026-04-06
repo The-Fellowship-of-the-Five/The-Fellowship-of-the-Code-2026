@@ -16,11 +16,11 @@ Purpose of The Fellowship Companion (TFC)
 Adapt to your project...
 
 We are 5 hobbits on our great journey from the Shire to Mordor. Along the way, we need a system to support our planning, decisions and survival.
-The Fellowship of the Five is a evolving digital tool we build together. It is not perfect, it is not finished - it evolves as we travel.
+The Fellowship of the Five is a evolving digital tool we build together. It is not perfect, it is not finished - it develops as we travel.
 
 Who we are: The Fellowship of the Five - a group of 5 hobbits (students) working together.
-What we build: PLACEHOLDER
-Why we build it: PLACEHOLDER
+What we build: An App that tracks our Inventory, gives us critial location information and lets us note down our tasks.
+Why we build it: To improve current and future adventuring situation, help clear misunderstandings and improve survivability. 
 Rules of our Journey
 All artifacts live in this GitHub repo.
 Gandalf (the AI) is our companion: we may ask him for help, but we always reflect on our decisions in The Red Book.
@@ -31,7 +31,7 @@ Chapters
 Chapter I - Planning
 “I will take the Ring, though I do not know the way.” - Frodo
 
-Go to Chapter I →
+Go to Chapter I → [Situation Intent](https://github.com/Mourice05/The-Fellowship-of-the-Code-2026/blob/main/artifacts/artifact-1/artifact%20-1-situation-intent.md)
 
 Chapter II - Paths & Choices
 “All we have to decide is what to do with the time that is given us.” - Gandalf
