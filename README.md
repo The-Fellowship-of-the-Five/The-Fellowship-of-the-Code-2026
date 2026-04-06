@@ -28,6 +28,7 @@ Peer sharing is optional but highly recommended: it keeps the Fellowship alive.
 The Red Book of Westmark (README.md + chapters/) is our reflection log and living changelog.
 
 Chapters
+
 Chapter I - Planning
 “I will take the Ring, though I do not know the way.” - Frodo
 
