@@ -38,7 +38,7 @@ Rules of our Journey:
 
 Chapters:
 
-Chapter I - Planning  
+Chapter I - Setting Out 
 “I will take the Ring, though I do not know the way.” - Frodo
 
 Go to Chapter I → [Situation Intent](https://github.com/Mourice05/The-Fellowship-of-the-Code-2026/blob/main/artifacts/artifact-1/artifact%20-1-situation-intent.md)
