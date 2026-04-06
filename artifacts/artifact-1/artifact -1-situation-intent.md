@@ -27,6 +27,7 @@ Critical alert system: Urgent notifications (for example: “no healing herbs le
 Task Tracker: Members can create, assign and complete tasks. The group sees what is open, what is done and whether something failed – with space to note effort or issues. 
 
 Assumptions & Constraints 
+
 Data Quality is dependent on the User: The App only knows of data that the members of the Fellowship input. If nobody reports a threat or updates their inventory, the data will be incomplete or wrong. The System is entirely dependent on active and honest participation.  
 
 The App assumes Honesty: There is no verification of Data. If someone logs items, they don’t have or fail to log items at all, then the system can produce harmful misinformation. Which ends up making the situation worse than no system at all.  
