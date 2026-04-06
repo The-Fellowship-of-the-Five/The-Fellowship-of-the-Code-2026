@@ -5,12 +5,12 @@ Lord of the Things - LoTs - The Fellowship of the Code – A Developer's Tale
 
 Table of Contents
 
-The Fellowship Companion
-Purpose of The Fellowship Companion (LoTs)
-Rules of our Journey
-Chapters
-Key Features of The Fellowship Companion
-Changelog
+- The Fellowship Companion
+- Purpose of The Fellowship Companion (LoTs)
+- Rules of our Journey
+- Chapters
+- Key Features of The Fellowship Companion
+- Changelog
 
 Purpose of The Fellowship Companion (LoTs)
 
