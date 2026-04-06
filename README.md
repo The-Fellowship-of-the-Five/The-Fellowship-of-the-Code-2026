@@ -18,12 +18,15 @@ We are 5 hobbits on our great journey from the Shire to Mordor. Along the way, w
 Lord of the Things is a evolving digital tool we build together. It is not perfect, it is not finished, it develops as we travel.
 
 Who we are:  
+
 The Fellowship of the Five - a group of 5 hobbits (students) working together.
 
 What we build:  
+
 An App that tracks our Inventory, calculates shopping lists, warns of us nearby threats, shows us markets on a map and lets us note down our tasks.
 
 Why we build it:  
+
 To stop buying duplicate resources, stop walking into orc camps and to make sure Sam always knows what's left to cook with. Its to improve current and future adventuring situations and keeping the Fellowship coordinated without having to shout across the wilderness.
 
 Rules of our Journey:
