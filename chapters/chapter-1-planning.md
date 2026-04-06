@@ -1,4 +1,4 @@
-# The Red Book of Westmarch - Chapter X: Title
+# The Red Book of Westmarch - Chapter 1: Setting Out
 
 ## Summary
 
