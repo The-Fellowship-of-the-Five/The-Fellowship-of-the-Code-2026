@@ -3,7 +3,7 @@ Lord of the Things - LoTs - The Fellowship of the Code – A Developer's Tale
 
 "You shall not Starve!" - Gandalf the disturber of the Peace
 
-Table of Contents
+Table of Contents:
 
 - The Fellowship Companion
 - Purpose of The Fellowship Companion (LoTs)
