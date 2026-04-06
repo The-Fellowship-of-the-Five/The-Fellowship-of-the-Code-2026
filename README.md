@@ -15,8 +15,8 @@ Changelog
 Purpose of The Fellowship Companion (TFC)
 Adapt to your project...
 
-We are 5 hobbits on our great journey from the Shire to Mordor. Along the way, we need a system to support our planning, decisions, communication, and survival.
-The Fellowship Companion is a evolving digital tool we build together. It is not perfect, it is not finished - it evolves as we travel.
+We are 5 hobbits on our great journey from the Shire to Mordor. Along the way, we need a system to support our planning, decisions and survival.
+The Fellowship of the Five is a evolving digital tool we build together. It is not perfect, it is not finished - it evolves as we travel.
 
 Who we are: The Fellowship of the Five - a group of 5 hobbits (students) working together.
 What we build: PLACEHOLDER
