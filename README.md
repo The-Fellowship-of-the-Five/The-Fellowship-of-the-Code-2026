@@ -87,7 +87,7 @@ Key Features of The Fellowship Companion:
 
 # Changelog:  
 
-# [1.0.0] - 08.04.2026
-# Added
+### [1.0.0] - 08.04.2026
+### Added
 - Full Setup of Github page, including folders. 
 > Earlier Changes were not tracked, as work was not fully done in GitHub.  
