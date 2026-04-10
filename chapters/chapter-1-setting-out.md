@@ -11,7 +11,7 @@
 
 ## Artifact
 
- - [Link to the artifact](https://github.com/The-Fellowship-of-the-Five/The-Fellowship-of-the-Code-2026/blob/main/artifacts/artifact-1/artifact-1-situation-intent.md)
+Link: - [The Fellowship of the Five - Artifact I: Situation & Intent](https://github.com/The-Fellowship-of-the-Five/The-Fellowship-of-the-Code-2026/blob/main/artifacts/artifact-1/artifact-1-situation-intent.md)
 
  - In this artifact we described the situation the Fellowship is facing while traveling with limited supplies and without a shared overview of what each member is carrying.  
  - Based on this we defined the intent and value of the  system and identified key capabilities such as *shared inventory tracking, meal planning and threat reporting.*  
