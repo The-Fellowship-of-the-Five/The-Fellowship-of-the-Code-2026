@@ -3,7 +3,7 @@ Lord of the Things - LoTs - The Fellowship of the Code – A Developer's Tale
 
 "You shall not Starve!" - Gandalf the disturber of the Peace
 
-Table of Contents:
+##Table of Contents:
 
 - The Fellowship Companion
 - Purpose of The Fellowship Companion (LoTs)
@@ -12,7 +12,7 @@ Table of Contents:
 - Key Features of The Fellowship Companion
 - Changelog
 
-Purpose of The Fellowship Companion (LoTs):
+##Purpose of The Fellowship Companion (LoTs):
 
 We are 5 hobbits on our great journey from the Shire to Mordor. Along the way, we need a system to support our planning, decisions and survival.
 Lord of the Things is a evolving digital tool we build together. It is not perfect, it is not finished, it develops as we travel.
