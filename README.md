@@ -99,6 +99,10 @@ Go to Chapter V →
 
 ## Changelog:  
 
+### [1.0.1] - 10.04.2026
+### Changed
+ - Github *Readme* and *Chapter 1* was adjusted and improved upon, after conversing with the Professor.
+
 ### [1.0.0] - 08.04.2026
 ### Added
 - Full Setup of Github page, including folders. 
