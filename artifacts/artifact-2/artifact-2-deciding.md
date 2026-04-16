@@ -15,17 +15,11 @@ This capability helps them plan their next resupply more efficiently, avoids unn
 
 ---
 
-# Mermaid Flowchart
+## Mermaid Flowchart
 
-Describe how the capability works as a sequence of steps.
-Use a single Mermaid flowchart.
-  Focus on:
-    User actions
-      System responses
-        Decisions or branching
-  Keep it readable and focused
-This flow answers: "What happens, and in what order?"
-
+The flowchart below describes how the *Recipe-Based Deficit Calculation* works from the Quartermaster/User's perspective.  
+It covers the scope of the meal, the recipe and the required ingredients compared to the Fellowship's collective inventory.  
+Branching paths show how the user handles missing ingredients, syncing with a shopping list, adjusting parameters or completely switching recipes before saving the plan and optionally sharing it with the group. 
 
 ```mermaid
 flowchart TB
@@ -76,7 +70,7 @@ flowchart TB
 
 ---
 
-# Wireframe Interface
+## Wireframe Interface
 
 Create one wireframe that represents this capability.
 
@@ -88,7 +82,7 @@ This wireframe answers: "What does the user see and interact with?"
 
 ---
 
-# Design Rationale
+## Design Rationale
 Explain your design decisions:
 How does this design support the intent and value defined in your Assignment 1?
 What did you deliberately leave out?
