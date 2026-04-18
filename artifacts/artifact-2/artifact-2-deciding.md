@@ -65,7 +65,6 @@ flowchart TB
     T:::user
     G1:::system
     G2:::system
-    H2:::system
     L:::system
     M:::system
     Z:::data
