@@ -23,50 +23,40 @@ Branching paths show how the user handles missing ingredients, syncing with a sh
 
 ```mermaid
 flowchart TB
-    Start(["Quartermaster opens 'Meal Planning'"])
-    Start --> Q{Single meal or multi-day plan?}
-    Q -->|Single meal| C
-    Q -->|Multi-day plan| B
-    C{Browse all or pick from presets?}
-    C -->|Show all recipes| R
-    C -->|Pick from preset| X[[History and saved meals]] --> |Browse| H
-    B[Enter meal parameters] --> D[Number of People]
-    D --> E[Number of Days]
+    Start(["Quartermaster opens 'Meal Planning'"]) --> Q{Single meal or multi-day plan?}
+    Q -->|Single meal| C{Browse all or pick from presets?}
+    Q -->|Multi-day plan| B[Enter meal parameters]
+    C -->|Browse all| R[[Show all recipes]]
+    C -->|Pick from preset| X[[History and saved meals]]
+    X -->|Browse| H[Select recipe]
+    B --> D[Number of people]
+    D --> E[Number of days]
     E --> F[Buffer day]
-    F --> G[[Show feasable and not feasable recipes]]
-    R[[Browse all]]
+    F --> G1[[Show source]]
+    G1 -->|Pick from saved, history or all| G[[Show recipes that fit]]
     G -->|Browse| H
     R -->|Browse| H
-    H[Select recipe] --> T[Overview]
+    H --> T[Overview]
     T --> H2[[Display required ingredients]]
     H2 --> Z[(Read collective inventory)]
     Z --> I{Ingredients missing?}
-    I -->|Yes| L[Deficit list: item + quantity]
-    I -->|No| M[Recipe is completeable]
-    L -->|Add to shopping list| K[[Sync to shopping list]]
+    I -->|Yes| L[[Deficit table: item + quantity]]
+    I -->|No| M[[Recipe is feasible, comparison table with leftovers]]
     L -->|Adjust parameters| B
     L -->|Pick different recipe| H
-    L -->|Cancel| ZZ
+    L -->|Cancel| ZZ([End])
     M -->|Save| N[(Save recipe)]
+    M -->|Share| S{Share to group?}
     M -->|Pick different recipe| H
     M -->|Cancel| ZZ
-    N --> S{Share to group?}
-    S -->|Yes| O[[Shared with group]]
-    S -->|No| ZZ
-    K --> ZZ
-    O --> ZZ
-    ZZ([End])
+    N --> ZZ
+    S --> ZZ
 
-     classDef decision fill:#fff8e1,stroke:#f57c00,stroke-width:2px,color:#000
+    classDef decision fill:#fff8e1,stroke:#f57c00,stroke-width:2px,color:#000
     classDef system fill:#e3f2fd,stroke:#1565c0,color:#000
     classDef data fill:#f3e5f5,stroke:#6a1b9a,color:#000
     classDef user fill:#e8f5e9,stroke:#2e7d32,color:#000
     classDef endpoint fill:#eceff1,stroke:#37474f,stroke-width:2px,color:#000
-    class Q,C,I,S decision
-    class G,R,H2,K,O,X,L,M system
-    class Z,N data
-    class B,D,E,F,H,T user
-    class Start,ZZ endpoint
 ```
 
 ---
