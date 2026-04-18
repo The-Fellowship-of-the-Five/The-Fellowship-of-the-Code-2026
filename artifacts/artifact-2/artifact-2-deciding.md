@@ -24,18 +24,19 @@ Branching paths show how the user handles missing ingredients, syncing with a sh
 ```mermaid
 flowchart TB
     Start(["Quartermaster opens 'Meal Planning'"]) --> Q{Single meal or multi-day plan?}
-    Q -->|Single meal| C{Browse all or pick from presets?}
+    Q -->|Single meal| C{Show source}
+    C -->|Saved recipes| H[Select recipe]
+    C -->|History| H
+    C -->|Browse all recipes| H
     Q -->|Multi-day plan| B[Enter meal parameters]
-    C -->|Browse all| R[[Show all recipes]]
-    C -->|Pick from preset| X[[History and saved meals]]
-    X -->|Browse| H[Select recipe]
     B --> D[Number of people]
     D --> E[Number of days]
     E --> F[Buffer day]
     F --> G1[[Show source]]
-    G1 -->|Pick from saved, history or all| G[[Show recipes that fit]]
-    G -->|Browse| H
-    R -->|Browse| H
+    G1 -->|Saved recipes| G2[[Show recipes that fit]]
+    G1 -->|History| G2
+    G1 -->|Browse all recipes| G2
+    G2 -->|Browse| H
     H --> T[Overview]
     T --> H2[[Display required ingredients]]
     H2 --> Z[(Read collective inventory)]
@@ -49,9 +50,28 @@ flowchart TB
     M -->|Share| S{Share to group?}
     M -->|Pick different recipe| H
     M -->|Cancel| ZZ
-    N --> ZZ
-    S --> ZZ
+    N -->|Recipe saved| ZZ
+    S -->|Recipe shared| ZZ
 
+    Start:::endpoint
+    Q:::decision
+    C:::decision
+    I:::decision
+    S:::decision
+    B:::user
+    D:::user
+    E:::user
+    F:::user
+    H:::user
+    T:::user
+    G1:::system
+    G2:::system
+    H2:::system
+    L:::system
+    M:::system
+    Z:::data
+    N:::data
+    ZZ:::endpoint
     classDef decision fill:#fff8e1,stroke:#f57c00,stroke-width:2px,color:#000
     classDef system fill:#e3f2fd,stroke:#1565c0,color:#000
     classDef data fill:#f3e5f5,stroke:#6a1b9a,color:#000
