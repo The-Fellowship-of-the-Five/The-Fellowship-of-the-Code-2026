@@ -101,7 +101,8 @@ Go to Chapter V →
 
 ### [1.0.2] - 19.04.2026
 ### Added
- - Artifact 2 added and multiple times improved. Mermaid Flowchart, Wireframe Interface created and displayed in Github. 
+ - Artifact 2 added and multiple times improved. Mermaid Flowchart, Wireframe Interface created and displayed in Github.
+ - RedBook Chapter II added and updated
 
 ### [1.0.1] - 10.04.2026
 ### Changed
