@@ -1,5 +1,7 @@
 # The Red Book of Westmarch - Chapter 1: Setting Out
 
+---
+
 ## Summary
 For this first step of the project, we worked together to define the basic idea behind our version of The Fellowship Companion.  
 At the beginning we discussed different possible directions for the app and what kind of problem it should solve for the Fellowship.  
@@ -11,6 +13,8 @@ This led us to the idea of focusing on *inventory management, meal planning, and
 After agreeing on the main idea, we structured our work according to the sections required in the assignment: situation, intent, value, system capabilities, and assumptions & constraints.   
 Each of these sections helped us describe the problem more clearly and think about what the system should really support. This process helped us turn our initial brainstorming ideas into a more structured concept for the application. 
 
+---
+
 ## Artifact
 
 Link: - [The Fellowship of the Five - Artifact I: Situation & Intent](https://github.com/The-Fellowship-of-the-Five/The-Fellowship-of-the-Code-2026/blob/main/artifacts/artifact-1/artifact-1-situation-intent.md)
@@ -18,6 +22,8 @@ Link: - [The Fellowship of the Five - Artifact I: Situation & Intent](https://gi
 In this artifact we described the situation the Fellowship is facing while traveling with limited supplies and without a shared overview of what each member is carrying.  
 Based on this we defined the intent and value of the  system and identified key capabilities such as *shared inventory tracking, meal planning and threat reporting.*  
 The artifact serves as the conceptual starting point for the further design and development of the application. 
+
+---
 
 ## AI Assistance
 
@@ -27,6 +33,8 @@ The artifact serves as the conceptual starting point for the further design and 
 English.  
  - Lastly, we used the help of Gandalf to help us with the starting basics on how to use GitHub.
  - Altogether, AI was a great support to create some structure amongst all our individual input. 
+
+---
 
 ## Lessons Learned
 
