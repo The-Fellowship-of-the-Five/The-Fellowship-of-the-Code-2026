@@ -5,7 +5,7 @@
 
 ## Artifact
 
-Link: - [The Fellowship of the Five - Artifact I: Situation & Intent](https://github.com/The-Fellowship-of-the-Five/The-Fellowship-of-the-Code-2026/blob/main/artifacts/artifact-1/artifact-1-situation-intent.md)
+Link: - [The Fellowship of the Five - Artifact 2: Deciding](https://github.com/The-Fellowship-of-the-Five/The-Fellowship-of-the-Code-2026/blob/main/artifacts/artifact-2/artifact-2-deciding.md)
 
  - 
 
