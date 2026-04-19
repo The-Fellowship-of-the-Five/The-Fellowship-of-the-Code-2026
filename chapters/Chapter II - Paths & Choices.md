@@ -11,7 +11,7 @@ This capability automates the comparison between required recipe ingredients and
 
 ## Artifact
 
-Link: - [The Fellowship of the Five - Artifact 2: Deciding](https://github.com/The-Fellowship-of-the-Five/The-Fellowship-of-the-Code-2026/blob/main/artifacts/artifact-2/artifact-2-deciding.md)
+Link: [The Fellowship of the Five - Artifact 2: Deciding](https://github.com/The-Fellowship-of-the-Five/The-Fellowship-of-the-Code-2026/blob/main/artifacts/artifact-2/artifact-2-deciding.md)
 
 Resource and food planning is one of the most vital tasks for a group navigating these dangerous environments. Without an automated system, the group must manually audit every member’s inventory and estimate ingredient quantities—a slow and tedious process that is prone to mistakes.  
 
