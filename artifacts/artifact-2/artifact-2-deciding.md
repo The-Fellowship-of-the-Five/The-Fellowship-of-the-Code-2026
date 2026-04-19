@@ -21,7 +21,7 @@ The flowchart below describes how the *Recipe-Based Deficit Calculation* works f
 It covers the scope of the meal, the recipe and the required ingredients compared to the Fellowship's collective inventory.  
 Branching paths show how the user handles missing ingredients, syncing with a shopping list, adjusting parameters or completely switching recipes before saving the plan and optionally sharing it with the group.  
   
-[Mermaid Flowchart](https://github.com/The-Fellowship-of-the-Five/The-Fellowship-of-the-Code-2026/blob/main/artifacts/artifact-2/src/decisions.mermaid.md)
+[Mermaid Flowchart for Recipe-Based Deficit Calculation](https://github.com/The-Fellowship-of-the-Five/The-Fellowship-of-the-Code-2026/blob/main/artifacts/artifact-2/src/decisions.mermaid.md)
 
 ```mermaid
 flowchart TB
@@ -83,8 +83,7 @@ flowchart TB
 
 ## Wireframe Interface
 
-[Wireframe for Recipe-Based Deficit Calculation](https://github.com/The-Fellowship-of-the-Five/The-Fellowship-of-the-Code-2026/blob/main/artifacts/artifact-2/src/decisions.md)
-
+![Wireframe Interface for Recipe-Based Deficit Calculation](https://github.com/The-Fellowship-of-the-Five/The-Fellowship-of-the-Code-2026/blob/main/artifacts/artifact-2/src/decisions.png)
 ---
 
 ## Design Rationale
