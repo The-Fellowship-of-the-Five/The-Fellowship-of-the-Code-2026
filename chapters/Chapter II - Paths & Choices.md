@@ -36,4 +36,4 @@ Link: - [The Fellowship of the Five - Artifact 2: Deciding](https://github.com/T
 
 - We learned that limiting features is often more difficult, but more rewarding, than adding them. By deliberately excluding per-member inventories and automation, the core decision (can we cook this meal?) became much clearer and easier to design for.
 - Designing the interface taught us the importance of providing context. Showing a user exactly what is missing and why a meal cannot be cooked is vastly more useful than a simple "error" or "not enough ingredients" prompt.
-- The Quartermaster doesn't just want to view data; they want to make a plan. Integrating "next actions" (like adjusting servings or adding to a shopping list) directly into the deficit comparison screen shifted the design from a static information dashboard into an active decision-making tool. 
+  
