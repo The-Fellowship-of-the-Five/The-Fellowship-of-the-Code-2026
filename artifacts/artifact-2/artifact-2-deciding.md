@@ -81,7 +81,7 @@ flowchart TB
 
 ## Wireframe Interface
 
-[Wireframe for Recipe-Based Deficit Calculation](./src/wireframe.png)
+[Wireframe for Recipe-Based Deficit Calculation](https://github.com/The-Fellowship-of-the-Five/The-Fellowship-of-the-Code-2026/blob/main/artifacts/artifact-2/src/decisions.png)
 
 ---
 
