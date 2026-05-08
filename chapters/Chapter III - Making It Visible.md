@@ -1,5 +1,3 @@
-# THIS STILL NEEDS TO BE CHECKED - PROTOTYPE
-
 # The Red Book of Westmarch - Chapter 3: Making It Visible
 
 ---
@@ -21,28 +19,30 @@ Turning written requirements and flowcharts into something visual is a critical 
 The visual prototype answers many questions, like what does the user see, where on the screen and how much detail?
 
 - This artifact presents an HTML & CSS representation of the core interface of LoTs, focusing on the screens and elements that a Fellowship member would interact with.
-- The design builds directly on the wireframe from Chapter II by adding visual structure, color, and layout to the previous concepts.
-- The prototype is not complete and partially static — it shows what the app looks like and how it can behave, yet not the final result.
+- The design builds directly on the wireframe from Chapter II by adding visual structure, semantic tags, and a consistent layout.
+- The prototype is not complete and purely static — it shows what the app looks like and how it could behave, by using CSS for simulating interactive behavior.
 
 The representation covers:
 
-- The main inventory overview, showing individual and group level supply data.
-- The meal planning view, where the quartermaster can review recipe feasibility.
-- Basic navigation structure connecting the core sections of the app.
+- The planning mode selection.
+- The parameter input form.
+- The recipe selection screen.
+- A navigation structure which relies on CSS only.
 
 ---
 
 ## AI Assistance
 
 - We used AI to help translate our wireframe into working HTML and CSS sketches, since none of us had prior experience with front or back end code.
-- One challenge was that AI generated code had features we hadn't asked for, and sometimes was not understandable. We had to repeatedly strip things back, check our understanding and the codes logic.  
+- One challenge was that AI generated code had features we did not ask for, and sometimes it was not understandable. We had to repeatedly strip things back, check our understanding and the codes logic or force the AI to use semantic HTML.
+- But AI was especially helpful in teaching us how to manage CSS Flexbox layouts for this mobile design and how to implement small UX improvements, for example: hiding default desktop arrows on number inputs.
 
 ---
 
 ## Lessons Learned
 
-- Visualizing something that previously only existed as text or a flowchart exposed gaps and contradictions. Logic and user friendlyness flaws we somehow missed beforehand. 
-- HTML and CSS are more accessible than expected for simple static layouts, but getting spacing and proportions right takes more effort than the code itself.
+- Visualizing something that previously only existed as text or a flowchart exposed gaps and contradictions. We realised logic and user friendlyness flaws we somehow missed before. 
+- HTML and CSS are more accessible than expected for simple static layouts, but getting spacing and proportions right takes some effort. We were surprised by how much interactivity we could "fake" by just using CSS like :target, without any JavaScript.
 - We learned that less is more in early stage prototyping. We thought that showing a clean, focused uid prototype with three well thought out views is more convincing than trying to mock up the entire app at once.
 
 
