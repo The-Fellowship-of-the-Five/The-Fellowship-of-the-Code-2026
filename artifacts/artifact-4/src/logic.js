@@ -249,11 +249,19 @@ function showScreen(screenName) {
    Wird bei jeder Nutzeraktion aufgerufen, bevor die UI updatet.
    */
 function updateStateFromInputs() {
+    // Single meal: fester Plan für 1 Person, 1 Tag, kein Puffer.
+    // Die Multi-Eingaben werden im Single-Modus bewusst ignoriert.
+    if (appState.mode === "single") {
+        appState.people = 1;
+        appState.days   = 1;
+        appState.buffer = 0;
+        return;
+    }
+
     appState.people = Number(getElement("#people").value) || 1;
     appState.days   = Number(getElement("#days").value)   || 1;
     appState.buffer = Number(getElement("#buffer").value) || 0;
 }
-
 
 /* 7. REZEPT WÄHLEN
    
