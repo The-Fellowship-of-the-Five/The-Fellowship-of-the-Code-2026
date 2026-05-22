@@ -23,7 +23,7 @@ All user decisions live in one explicit state object (`appState` in `logic.js`):
 - `people`, `days`, `buffer` – the numeric parameters from the input fields (default 9 / 3 / 1)
 - `saved`, `shared` – whether the result was saved or shared
 
-The capability also reads two fixed data sets: the recipe definitions (required kg per ingredient) and two inventory snapshots — `sharedInventory` (a normal stock level) and `lowInventory` (a reduced level that triggers the deficit case). The comparison function reads `appState.selectedRecipe`, looks up its requirements, subtracts the available amount per ingredient and splits the result into surplus (`left`) and deficit (`missing`).
+One single shared inventory as the source of truth. The available amounts never change between recipes; whether a meal is feasible falls out of the comparison itself, which keeps the model honest and the UI consistent.
 
 ### Why this capability matters for the Fellowship at this stage of the journey
 
@@ -64,3 +64,4 @@ The flow from Assignment 2 is preserved one-to-one. Selecting **single** vs. **m
 - **Dynamic scaling** of requirements by `people` / `days` / `buffer`: those values are stored in state and shown in the UI, but the comparison currently uses the recipe's fixed per-recipe amounts. Scaling is the obvious next step.
 - **Real persistence:** `saved` and `shared` are state flags only — nothing is written to storage or sent anywhere yet.
 - **Backend / live inventory sync, map, threats and task tracker** remain out of scope, exactly as defined for this single-capability slice.
+- **No new visuals:** the interface reuses the plain visual design from Assignment 3 (system font, neutral palette); Assignment 4 only adds behavior, state and the result screens already defined in the Assignment 2 wireframe.
