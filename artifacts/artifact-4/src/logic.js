@@ -90,14 +90,9 @@ const recipes = {
 };
 
 
-/* ================================================================
-   2. INVENTARDATEN
-   ----------------------------------------------------------------
-   Zwei Szenarien für die Machbarkeits-Screens:
-
+/* INVENTARDATEN
    sharedInventory → normales Vorratslevel (reicht für Rabbit Stew)
-   lowInventory    → reduziertes Level (zeigt den roten Fehlerfall)
-================================================================ */
+*/
 const sharedInventory = {
     "Potatoes":    4.5,
     "Rabbit meat": 2.0,
@@ -107,26 +102,15 @@ const sharedInventory = {
     "Water":       2.0
 };
 
-const lowInventory = {
-    "Potatoes":    1.5,
-    "Rabbit meat": 2.0,
-    "Carrots":     0.2,
-    "Herbs":       0.0,
-    "Salt":        0.3,
-    "Water":       2.0
-};
-
-
-/* ================================================================
-   3. APP-STATE
-   ----------------------------------------------------------------
+/* APP-STATE
+  
    Der State ist das "Gedächtnis" der App während einer Sitzung.
    Alle Nutzerentscheidungen werden hier gespeichert und bei
    jedem UI-Update ausgelesen.
 
    selectedRecipe startet als null → im Single-Modus ist beim
    Öffnen von Screen 3 keine Karte vorausgewählt.
-================================================================ */
+*/
 const appState = {
     mode:           null,     // Aktiver Planungsmodus: "single", "multi" oder null (Start)
     source:         "all",    // Aktiver Rezeptquellen-Tab: "all", "saved", "history"
