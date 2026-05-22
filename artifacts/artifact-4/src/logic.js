@@ -341,8 +341,20 @@ function updateOverview() {
 function calculateComparison(inventory) {
     const recipe = recipes[appState.selectedRecipe];
 
+    // Die Rezeptmengen sind für den Standardplan kalibriert:
+    // 9 Personen über 3 Tage + 1 Puffertag.
+    const BASE_PEOPLE = 9;
+    const BASE_DAYS   = 3 + 1;            // days + buffer
+
+    // Plan-Faktor: skaliert die Mengen proportional zu Personen UND Plandauer.
+    // 9 Personen / 4 Tage  → Faktor 1 (= Ausgangsmengen).
+    // doppelt so viele Personen → doppelte Menge.
+    const planFactor =
+        (appState.people * (appState.days + appState.buffer)) /
+        (BASE_PEOPLE * BASE_DAYS);
+
     return Object.keys(recipe.requirements).map(function (ingredient) {
-        const required   = recipe.requirements[ingredient];
+        const required   = recipe.requirements[ingredient] * planFactor;
         const available  = inventory[ingredient] || 0;
         const difference = available - required;
 
