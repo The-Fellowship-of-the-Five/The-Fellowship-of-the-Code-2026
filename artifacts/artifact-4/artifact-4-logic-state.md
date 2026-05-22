@@ -1,6 +1,5 @@
 
-[artifact-4](https://github.com/The-Fellowship-of-the-Five/The-Fellowship-of-the-Code-2026/raw/main/artifacts/artifact-4/src/interface.html)
-
+[artifact-4](https://the-fellowship-of-the-five.github.io/The-Fellowship-of-the-Code-2026/artifacts/artifact-4/src/interface.html)
 
 
 
