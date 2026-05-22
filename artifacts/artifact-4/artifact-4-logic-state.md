@@ -1,6 +1,3 @@
-
-[artifact-4](https://the-fellowship-of-the-five.github.io/The-Fellowship-of-the-Code-2026/artifacts/artifact-4/src/interface.html)
-
 # Artifact 4 - Logic & State
 
 ---
@@ -33,8 +30,7 @@ The Fellowship is moving through hostile wilderness with rare, unreliable resupp
 
 ## Implementation Artifact
 
-**Live interface (rendered):**
-https://the-fellowship-of-the-five.github.io/The-Fellowship-of-the-Code-2026/artifacts/artifact-4/src/interface.html
+[Artifact 4 - Interface](https://the-fellowship-of-the-five.github.io/The-Fellowship-of-the-Code-2026/artifacts/artifact-4/src/interface.html)
 
 **Source files:**
 - [interface.html](https://github.com/The-Fellowship-of-the-Five/The-Fellowship-of-the-Code-2026/blob/main/artifacts/artifact-4/src/interface.html)
