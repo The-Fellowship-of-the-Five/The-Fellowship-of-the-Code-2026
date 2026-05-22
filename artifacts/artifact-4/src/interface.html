@@ -1,1 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- META: Zeichensatz und mobile Darstellung -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoTs Meal Planning</title>
 
+    <!-- FONTS: Cinzel für Titel (mittelalterliche Majuskel), Lato für Fließtext -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+
+    <!-- STYLES: Alle Farben, Abstände und Layouts kommen aus style.css -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- LOGIK: defer = erst HTML fertig laden, dann JS ausführen -->
+    <script src="logic.js" defer></script>
+</head>
+<body>
+
+<!-- ================================================================
+     PHONE SHELL
+     Der äußere Handy-Rahmen. Alle Screens leben hier drin.
+     JS wechselt zwischen Screens über die Klasse .active-screen.
+================================================================ -->
+<main class="phone-shell">
+
+
+    <!-- ============================================================
+         SCREEN 1 · Start – Planungsmodus wählen
+         Der Nutzer wählt: Einzelnes Gericht oder Mehrtagsplan.
+         data-mode  → speichert den Modus im App-State
+         data-go    → bestimmt den Ziel-Screen beim Klick
+    ============================================================ -->
+    <section class="screen active-screen" data-screen="start">
+        <header class="status-bar">
+            <span>9:41</span>
+            <span>LTE 78%</span>
+        </header>
+
+        <header class="app-header">
+            <h1>Meal Planning</h1>
+        </header>
+
+        <div class="app-content">
+            <fieldset class="mode-selection">
+                <legend class="label-title">Planning mode</legend>
+                <nav class="button-row">
+                    <div class="mode-option">
+                        <!-- Single: setzt Modus, löscht Rezeptauswahl, geht zu Screen 3 -->
+                        <button class="btn-outline" type="button"
+                                data-mode="single" data-go="single-history">
+                            Single meal
+                        </button>
+                        <span class="hint">Quick check for one recipe</span>
+                    </div>
+                    <div class="mode-option">
+                        <!-- Multi: setzt Modus, geht zu Screen 2 -->
+                        <button class="btn-outline" type="button"
+                                data-mode="multi" data-go="multi-parameters">
+                            Multi-day plan
+                        </button>
+                        <span class="hint">Set people, days and buffer</span>
+                    </div>
+                </nav>
+            </fieldset>
+
+            <p class="inventory-info">Current inventory basis: shared group inventory</p>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         SCREEN 2 · Multi-day Plan – Parameter eingeben
+         Nutzer gibt Personenanzahl, Tage und Puffertage ein.
+         Die Werte werden von logic.js ausgelesen und im State gespeichert.
+    ============================================================ -->
+    <section class="screen" data-screen="multi-parameters">
+        <header class="status-bar">
+            <span>9:41</span>
+            <span>LTE 78%</span>
+        </header>
+
+        <header class="app-header">
+            <h1>Meal Planning</h1>
+        </header>
+
+        <div class="app-content">
+
+            <!-- Aktiver Modus mit Wechsel-Möglichkeit -->
+            <section class="card">
+                <header class="card-header">
+                    <div>
+                        <span class="label-title">Selected mode</span>
+                        <strong>Multi-day plan</strong>
+                    </div>
+                    <button class="btn-small" type="button" data-go="start">Change mode</button>
+                </header>
+            </section>
+
+            <!-- Zahleneingaben: IDs werden von logic.js direkt ausgelesen.
+                 novalidate verhindert Browser-eigene Validierungsmeldungen.
+                 Die Browser-eigene Spinbox (Pfeile) ist aktiv. -->
+            <form class="card" novalidate>
+                <span class="label-title">Meal parameters</span>
+                <div class="input-group-row">
+                    <div class="input-field">
+                        <label for="people">Number of people</label>
+                        <input type="number" id="people" value="9" min="1">
+                    </div>
+                    <div class="input-field">
+                        <label for="days">Days</label>
+                        <input type="number" id="days" value="3" min="1">
+                    </div>
+                    <div class="input-field">
+                        <label for="buffer">Buffer day</label>
+                        <input type="number" id="buffer" value="1" min="0">
+                    </div>
+                </div>
+            </form>
+            <section class="card">
+                <span class="label-title">Recipe source</span>
+                <nav class="tab-nav" aria-label="Recipe source">
+                    <button class="tab-btn active" type="button" data-source="all">Browse all</button>
+                    <button class="tab-btn" type="button" data-source="saved">Saved Recipes</button>
+                    <button class="tab-btn" type="button" data-source="history">History</button>
+                </nav>
+            </section>
+
+            <button class="btn-primary" type="button" data-go="select-recipe">
+                Show recipes that fit
+            </button>
+
+            <button class="btn-back mt-auto" type="button" data-go="start">
+                <span class="icon">&#10094;</span> Back to start
+            </button>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         SCREEN 3 · Single Meal – Rezept aus History wählen
+         Alle Rezeptkarten starten ohne Vorauswahl.
+         Ein Klick auf "Select" speichert das Rezept im State
+         und leitet direkt zu Screen 6 weiter.
+    ============================================================ -->
+    <section class="screen" data-screen="single-history">
+        <header class="status-bar">
+            <span>9:41</span>
+            <span>LTE 78%</span>
+        </header>
+
+        <header class="app-header">
+            <h1>Meal Planning</h1>
+        </header>
+
+        <div class="app-content">
+
+            <!-- Aktiver Modus -->
+            <section class="card">
+                <header class="card-header">
+                    <div>
+                        <span class="label-title">Selected mode</span>
+                        <strong>Single meal</strong>
+                    </div>
+                    <button class="btn-small" type="button" data-go="start">Change mode</button>
+                </header>
+            </section>
+
+            <!-- Tabs: data-source wird von logic.js ausgewertet.
+                 "Browse all" ist Standard, passend zu appState.source = "all" -->
+            <section class="card">
+                <span class="label-title">Recipe source</span>
+                <nav class="tab-nav" aria-label="Recipe source">
+                    <button class="tab-btn active" type="button" data-source="all">Browse all</button>
+                    <button class="tab-btn" type="button" data-source="saved">Saved Recipes</button>
+                    <button class="tab-btn" type="button" data-source="history">History</button>
+                </nav>
+            </section>
+
+            <!-- Rezeptliste: KEINE selected-Klasse, KEIN active-Button beim Start
+                 data-recipe-card → identifiziert die Karte für JS
+                 data-recipe + data-go → wählt Rezept aus UND wechselt Screen -->
+            <section class="recipe-list-container">
+                <!-- ID damit JS den Titel je nach gewähltem Tab aktualisieren kann -->
+                <span class="label-title" id="single-source-title">History</span>
+
+                <article class="recipe-item" data-recipe-card="Rabbit Stew">
+                    <div class="recipe-info">
+                        <strong>Rabbit Stew</strong>
+                        <span class="hint">familiar meal · good for cold travel conditions</span>
+                    </div>
+                    <button class="btn-small" type="button"
+                            data-recipe="Rabbit Stew" data-go="overview-single">
+                        Select
+                    </button>
+                </article>
+
+                <article class="recipe-item" data-recipe-card="Vegetable Soup">
+                    <div class="recipe-info">
+                        <strong>Vegetable Soup</strong>
+                        <span class="hint">12 servings · low meat use</span>
+                    </div>
+                    <button class="btn-small" type="button"
+                            data-recipe="Vegetable Soup" data-go="overview-single">
+                        Select
+                    </button>
+                </article>
+
+                <article class="recipe-item" data-recipe-card="Travel Bread">
+                    <div class="recipe-info">
+                        <strong>Travel Bread</strong>
+                        <span class="hint">portable but limited warmth and variety</span>
+                    </div>
+                    <button class="btn-small" type="button"
+                            data-recipe="Travel Bread" data-go="overview-single">
+                        Select
+                    </button>
+                </article>
+
+                <article class="recipe-item" data-recipe-card="Dried Meat Stew">
+                    <div class="recipe-info">
+                        <strong>Dried Meat Stew</strong>
+                        <span class="hint">protein-heavy option</span>
+                    </div>
+                    <button class="btn-small" type="button"
+                            data-recipe="Dried Meat Stew" data-go="overview-single">
+                        Select
+                    </button>
+                </article>
+            </section>
+
+            <button class="btn-back mt-auto" type="button" data-go="start">
+                <span class="icon">&#10094;</span> Back to start
+            </button>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         SCREEN 4 · Multi-day – Rezept auswählen
+         Zeigt machbare und nicht machbare Rezepte getrennt.
+         Der Filtertext oben wird von logic.js dynamisch befüllt.
+    ============================================================ -->
+    <section class="screen" data-screen="select-recipe">
+        <header class="status-bar">
+            <span>9:41</span>
+            <span>LTE 78%</span>
+        </header>
+
+        <header class="app-header">
+            <h1>Select Recipe</h1>
+        </header>
+
+        <div class="app-content">
+
+            <!-- Dynamischer Filtertext: wird von updateFilterText() in JS gesetzt -->
+            <p class="filter-text" id="filter-text">
+                Filtered: People: 9 | Days: 3 | Buffer: 1 | all recipes
+            </p>
+
+            <!-- Machbare Rezepte: Zutaten reichen aus -->
+            <section class="card">
+                <span class="label-title label-title--spaced">Feasible Recipes</span>
+                <article class="recipe-item" data-recipe-card="Vegetable Soup">
+                    <div class="recipe-info">
+                        <strong>Vegetable Soup</strong>
+                        <span class="hint">12 servings · low meat use</span>
+                    </div>
+                    <button class="btn-small" type="button"
+                            data-recipe="Vegetable Soup" data-go="overview-multi">
+                        Select
+                    </button>
+                </article>
+            </section>
+
+            <!-- Nicht machbare Rezepte: Zutaten fehlen, trotzdem auswählbar -->
+            <section class="card">
+                <span class="label-title label-title--spaced">Currently Not Feasible Recipes</span>
+                <article class="recipe-item" data-recipe-card="Travel Bread">
+                    <div class="recipe-info">
+                        <strong>Travel Bread</strong>
+                        <span class="hint">portable but limited warmth and variety</span>
+                    </div>
+                    <button class="btn-small" type="button"
+                            data-recipe="Travel Bread" data-go="overview-multi">
+                        Select
+                    </button>
+                </article>
+                <article class="recipe-item" data-recipe-card="Rabbit Stew">
+                    <div class="recipe-info">
+                        <strong>Rabbit Stew</strong>
+                        <span class="hint">familiar meal · good for cold travel conditions</span>
+                    </div>
+                    <button class="btn-small" type="button"
+                            data-recipe="Rabbit Stew" data-go="overview-multi">
+                        Select
+                    </button>
+                </article>
+            </section>
+
+            <button class="btn-back mt-auto" type="button" data-go="multi-parameters">
+                <span class="icon">&#10094;</span> Back to parameters
+            </button>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         SCREEN 5 · Übersicht – Multi-day Plan
+         Zusammenfassung: Rezept + Personenzahl + Tage + Puffer.
+         Alle Werte mit ID werden von logic.js dynamisch befüllt.
+    ============================================================ -->
+    <section class="screen" data-screen="overview-multi">
+        <header class="status-bar">
+            <span>9:41</span>
+            <span>LTE 78%</span>
+        </header>
+
+        <header class="app-header">
+            <h1>Overview</h1>
+        </header>
+
+        <div class="app-content">
+            <section class="card overview-card">
+                <div class="overview-topline">
+                    <span class="label-title">Selected recipe</span>
+                    <span class="source-label">from <span id="overview-source">all</span></span>
+                </div>
+
+                <!-- Dynamische Werte: von updateOverview() in JS gesetzt -->
+                <strong id="overview-multi-title">Rabbit Stew</strong>
+                <span class="hint overview-hint" id="overview-multi-description">
+                    Warm meal · suitable for 9 people
+                </span>
+
+                <div class="overview-meta">
+                    <div class="mini-stat">
+                        <span>Servings</span>
+                        <strong id="overview-servings">9</strong>
+                    </div>
+                    <div class="mini-stat">
+                        <span>Days</span>
+                        <strong id="overview-days">3</strong>
+                    </div>
+                    <div class="mini-stat">
+                        <span>Buffer</span>
+                        <strong id="overview-buffer">1</strong>
+                    </div>
+                </div>
+
+                <!-- data-action="compare" startet den Machbarkeits-Check in JS -->
+                <button class="btn-primary" type="button" data-action="compare">
+                    Compare requirement and inventory
+                </button>
+            </section>
+
+            <button class="btn-back mt-auto" type="button" data-go="select-recipe">
+                <span class="icon">&#10094;</span> Back to recipes
+            </button>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         SCREEN 6 · Übersicht – Single Meal
+         Kompaktere Version ohne Personen/Tage/Puffer-Statistiken,
+         da es nur um ein einzelnes Gericht geht.
+    ============================================================ -->
+    <section class="screen" data-screen="overview-single">
+        <header class="status-bar">
+            <span>9:41</span>
+            <span>LTE 78%</span>
+        </header>
+
+        <header class="app-header">
+            <h1>Overview</h1>
+        </header>
+
+        <div class="app-content">
+            <section class="card overview-card compact-overview">
+                <div class="overview-topline">
+                    <span class="label-title">Selected recipe</span>
+                    <!-- Wird von updateOverview() in JS aktualisiert -->
+                    <span class="source-label">from <span id="overview-single-source">all</span></span>
+                </div>
+
+                <!-- Dynamische Werte: von updateOverview() in JS gesetzt -->
+                <strong id="overview-single-title">Rabbit Stew</strong>
+                <span class="hint overview-hint" id="overview-single-description">
+                    Warm meal · suitable for 1 person
+                </span>
+
+                <!-- data-action="compare" startet den Machbarkeits-Check in JS -->
+                <button class="btn-primary" type="button" data-action="compare">
+                    Compare requirement and inventory
+                </button>
+            </section>
+
+            <!-- data-reset="recipes" → JS setzt Rezeptauswahl zurück beim Zurücknavigieren -->
+            <button class="btn-back mt-auto" type="button" data-go="single-history" data-reset="recipes">
+                <span class="icon">&#10094;</span> Back to overwiew
+            </button>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         SCREEN 7 · Machbarkeit – NICHT möglich (roter Screen)
+         Wird angezeigt, wenn Zutaten fehlen.
+         tbody wird von renderTable() in JS dynamisch befüllt.
+    ============================================================ -->
+    <section class="screen" data-screen="feasibility-not">
+        <header class="status-bar">
+            <span>9:41</span>
+            <span>LTE 78%</span>
+        </header>
+
+        <header class="app-header">
+            <h1>Meal Feasibility</h1>
+        </header>
+
+        <div class="app-content compact-content">
+
+            <!-- Fehler-Karte: roter Hintergrund -->
+            <section class="status-card error">
+                <strong>Not feasible!</strong>
+                <span>3 ingredients missing</span>
+                <!-- Text wird von updateFeasibilityScreens() in JS gesetzt -->
+                <p id="not-feasible-text">
+                    Rabbit Stew can not be prepared for 9 people over 3 days without changes or additional supplies.
+                </p>
+            </section>
+
+            <!-- Tabelle: tbody wird von renderTable("#missing-table-body", ...) befüllt -->
+            <section class="card table-card">
+                <span class="label-title">Comparison table in kg</span>
+                <table class="comparison-table" aria-label="Missing ingredient comparison">
+                    <thead>
+                        <tr>
+                            <th>Ingredient</th>
+                            <th>Req.</th>
+                            <th>Avail.</th>
+                            <th>Missing</th>
+                        </tr>
+                    </thead>
+                    <tbody id="missing-table-body"></tbody>
+                </table>
+            </section>
+
+            <div class="action-grid two-columns">
+                <!-- id="btn-adjust-servings" → JS blendet diesen Button
+                     im Single-Modus aus, da er dort nicht relevant ist -->
+                <button class="btn-primary" type="button" id="btn-adjust-servings" data-go="multi-parameters">
+                    Adjust servings / days
+                </button>
+                <button class="btn-primary" type="button" data-action="pick-different">
+                    Pick different recipe
+                </button>
+            </div>
+            <button class="btn-primary" type="button" data-go="start">Cancel</button>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         SCREEN 8 · Machbarkeit – MÖGLICH (grüner Screen)
+         Wird angezeigt, wenn alle Zutaten vorhanden sind.
+         Zeigt verbleibende Mengen nach der Zubereitung.
+    ============================================================ -->
+    <section class="screen" data-screen="feasibility-ok">
+        <header class="status-bar">
+            <span>9:41</span>
+            <span>LTE 78%</span>
+        </header>
+
+        <header class="app-header">
+            <h1>Meal Feasibility</h1>
+        </header>
+
+        <div class="app-content compact-content">
+
+            <!-- Erfolgs-Karte: grüner Hintergrund -->
+            <section class="status-card success">
+                <strong>Feasible</strong>
+                <!-- Text wird von updateFeasibilityScreens() in JS gesetzt -->
+                <p id="feasible-text">Rabbit stew can be prepared with the current shared supplies.</p>
+            </section>
+
+            <!-- Kurzübersicht der Planungsparameter -->
+            <section class="card decision-summary">
+                <span class="label-title">Decision summary</span>
+                <p>Missing items: none</p>
+                <p id="enough-for-text">Enough for: 9 people</p>
+                <p id="plan-basis-text">Plan basis: 3 days + 1 buffer</p>
+            </section>
+
+            <!-- Tabelle: tbody wird von renderTable("#left-table-body", ...) befüllt -->
+            <section class="card table-card">
+                <span class="label-title">Comparison table in kg</span>
+                <table class="comparison-table" aria-label="Left ingredient comparison">
+                    <thead>
+                        <tr>
+                            <th>Ingredient</th>
+                            <th>Req.</th>
+                            <th>Avail.</th>
+                            <th>Left</th>
+                        </tr>
+                    </thead>
+                    <tbody id="left-table-body"></tbody>
+                </table>
+            </section>
+
+            <!-- data-action="save" / "share" → saveRecipe() / shareRecipe() in JS -->
+            <div class="action-grid two-columns">
+                <button class="btn-primary" type="button" data-action="save">Save recipe</button>
+                <button class="btn-primary" type="button" data-action="share">Share to group</button>
+            </div>
+            <button class="btn-primary" type="button" data-go="start">Cancel</button>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         SCREEN 9 · Feedback – Nach Speichern oder Teilen
+         Gleicher Aufbau wie Screen 8, aber mit Bestätigungsmeldungen.
+         #saved-message und #shared-message werden über die Klasse
+         .visible von JS ein- und ausgeblendet.
+    ============================================================ -->
+    <section class="screen" data-screen="feasibility-feedback">
+        <header class="status-bar">
+            <span>9:41</span>
+            <span>LTE 78%</span>
+        </header>
+
+        <header class="app-header">
+            <h1>Meal Feasibility</h1>
+        </header>
+
+        <div class="app-content compact-content">
+
+            <section class="status-card success">
+                <strong>Feasible</strong>
+                <p id="feedback-feasible-text">Rabbit stew can be prepared with the current shared supplies.</p>
+            </section>
+
+            <section class="card decision-summary">
+                <span class="label-title">Decision summary</span>
+                <p>Missing items: none</p>
+                <p id="feedback-enough-for-text">Enough for: 9 people</p>
+                <p id="feedback-plan-basis-text">Plan basis: 3 days + 1 buffer</p>
+            </section>
+
+            <!-- Tabelle: tbody wird von renderTable("#feedback-left-table-body", ...) befüllt -->
+            <section class="card table-card">
+                <span class="label-title">Comparison table in kg</span>
+                <table class="comparison-table" aria-label="Left ingredient comparison after action">
+                    <thead>
+                        <tr>
+                            <th>Ingredient</th>
+                            <th>Req.</th>
+                            <th>Avail.</th>
+                            <th>Left</th>
+                        </tr>
+                    </thead>
+                    <tbody id="feedback-left-table-body"></tbody>
+                </table>
+            </section>
+
+            <!-- Bestätigungen: standardmäßig display:none, .visible = sichtbar -->
+            <p class="feedback-message" id="saved-message">Recipe saved!</p>
+            <p class="feedback-message" id="shared-message">Recipe shared with group!</p>
+
+            <div class="action-grid two-columns">
+                <button class="btn-primary" type="button" data-action="save">Save recipe</button>
+                <button class="btn-primary" type="button" data-action="share">Share to group</button>
+            </div>
+            <button class="btn-primary" type="button" data-go="start">Cancel</button>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         PAGINATION (zentral)
+         Sitzt außerhalb aller Screens. JS aktualisiert den aktiven
+         Punkt bei jedem Screen-Wechsel über updatePagination().
+         Die Zuordnung Screen → Punkt ist in der screenDotMap in
+         logic.js definiert.
+    ============================================================ -->
+    <footer class="pagination" id="main-pagination">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </footer>
+
+</main>
+</body>
+</html>
