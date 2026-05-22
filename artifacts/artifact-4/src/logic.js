@@ -403,8 +403,7 @@ function renderTable(tableSelector, rows, resultType) {
 // dynamische Texte, Tabellen und Bestätigungsmeldungen.
 function updateFeasibilityScreens() {
     const recipe      = recipes[appState.selectedRecipe];
-    const normalRows  = calculateComparison(sharedInventory);
-    const missingRows = calculateComparison(lowInventory);
+    const rows  = calculateComparison(sharedInventory);
 
     // Dynamische Texte
     getElement("#not-feasible-text").textContent =
