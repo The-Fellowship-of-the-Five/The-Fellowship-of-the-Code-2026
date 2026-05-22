@@ -1,4 +1,9 @@
 
+[artifact-4](https://github.com/The-Fellowship-of-the-Five/The-Fellowship-of-the-Code-2026/blob/main/artifacts/artifact-4/src/interface.html)
+
+
+
+
 Reuse the Same System Capability
 You must use the same system capability you selected in Assignment 2 and implemented statically in Assignment 3.
 Briefly describe it at the top of your document and also answer:
