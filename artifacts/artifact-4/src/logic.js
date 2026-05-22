@@ -404,7 +404,7 @@ function renderTable(tableSelector, rows, resultType) {
 function updateFeasibilityScreens() {
     const recipe      = recipes[appState.selectedRecipe];
     const rows  = calculateComparison(sharedInventory);
-
+   
     // Dynamische Texte
     getElement("#not-feasible-text").textContent =
         `${recipe.name} can not be prepared for ${appState.people} people over ${appState.days} days without changes or additional supplies.`;
@@ -419,9 +419,9 @@ function updateFeasibilityScreens() {
     getElement("#feedback-plan-basis-text").textContent = `Plan basis: ${appState.days} days + ${appState.buffer} buffer`;
 
     // Tabellen befüllen
-    renderTable("#missing-table-body",       missingRows, "missing");
-    renderTable("#left-table-body",          normalRows,  "left");
-    renderTable("#feedback-left-table-body", normalRows,  "left");
+    renderTable("#missing-table-body",       rows, "missing");
+    renderTable("#left-table-body",          rows,  "left");
+    renderTable("#feedback-left-table-body", rows,  "left");
 
     // Bestätigungsmeldungen: .visible = sichtbar, ohne = versteckt
     getElement("#saved-message").classList.toggle("visible", appState.saved);
