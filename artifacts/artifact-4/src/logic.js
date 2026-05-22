@@ -35,7 +35,6 @@ const recipes = {
         name:         "Rabbit Stew",
         description:  "familiar meal · good for cold travel conditions",
         overviewText: "Warm meal",
-        feasible:     true,
         requirements: {
             "Potatoes":    3.0,
             "Rabbit meat": 2.0,
@@ -49,7 +48,6 @@ const recipes = {
         name:         "Vegetable Soup",
         description:  "12 servings · low meat use",
         overviewText: "Low meat use",
-        feasible:     true,
         requirements: {
             "Potatoes":    2.0,
             "Rabbit meat": 0.0,
@@ -63,7 +61,6 @@ const recipes = {
         name:         "Travel Bread",
         description:  "portable but limited warmth and variety",
         overviewText: "Portable meal",
-        feasible:     false,
         requirements: {
             "Potatoes":    3.0,
             "Rabbit meat": 2.0,
@@ -77,7 +74,6 @@ const recipes = {
         name:         "Dried Meat Stew",
         description:  "protein-heavy option",
         overviewText: "Protein-heavy option",
-        feasible:     false,
         requirements: {
             "Potatoes":    3.0,
             "Rabbit meat": 2.0,
@@ -465,7 +461,8 @@ function compareRequirementAndInventory() {
     updateWholeInterface();
 
     const recipe = recipes[appState.selectedRecipe];
-    showScreen(recipe.feasible ? "feasibility-ok" : "feasibility-not");
+    const isFeasible = rows.every(function(row) { return row.missing === 0;});
+    showScreen(isFeasable ? "feasibility-ok" : "feasibility-not");
 }
 
 // ANDERES REZEPT WÄHLEN: Navigiert je nach Modus zum richtigen Screen.
