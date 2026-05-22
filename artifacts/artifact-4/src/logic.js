@@ -1,8 +1,4 @@
-/* ================================================================
-   LORD OF THE THINGS – Meal Planning
-   Datei: logic.js
-   ----------------------------------------------------------------
-   Aufbau dieser Datei:
+/* Aufbau dieser Datei:
    1. REZEPTDATEN      – alle verfügbaren Rezepte mit Zutaten
    2. INVENTARDATEN    – vorhandene Vorräte (normal + reduziert)
    3. APP-STATE        – was der Nutzer gerade ausgewählt hat
@@ -15,21 +11,20 @@
    10. AKTIONEN        – Vergleich, Speichern, Teilen
    11. EVENT LISTENER  – Klicks und Eingaben mit Funktionen verbinden
    12. APP START       – Initialisierung beim Laden der Seite
-================================================================ */
+   */
 
 
-/* ================================================================
+/* 
    1. REZEPTDATEN
-   ----------------------------------------------------------------
+   
    Alle Rezepte sind hier als Objekte gespeichert.
 
    Felder pro Rezept:
-   - name         → Anzeigename (muss mit data-recipe-card im HTML übereinstimmen)
+   - name         → Anzeigename 
    - description  → Kurzbeschreibung für die Rezeptkarte
    - overviewText → Noch kürzere Version für die Übersichtsseite
-   - feasible     → true = Vorräte reichen, false = Zutaten fehlen
    - requirements → benötigte Mengen in kg pro Zutat
-================================================================ */
+   */
 const recipes = {
     "Rabbit Stew": {
         name:         "Rabbit Stew",
@@ -86,8 +81,8 @@ const recipes = {
 };
 
 
-/* INVENTARDATEN
-   sharedInventory → normales Vorratslevel (reicht für Rabbit Stew)
+/* 2. INVENTARDATEN
+   sharedInventory → normales Vorratslevel (reicht für Rabbit Stew & Vegetable Soup)
 */
 const sharedInventory = {
     "Potatoes":    4.5,
@@ -98,7 +93,7 @@ const sharedInventory = {
     "Water":       2.0
 };
 
-/* APP-STATE
+/* 3. APP-STATE
   
    Der State ist das "Gedächtnis" der App während einer Sitzung.
    Alle Nutzerentscheidungen werden hier gespeichert und bei
@@ -119,12 +114,8 @@ const appState = {
 };
 
 
-/* ================================================================
-   4. DOM-HELFER
-   ----------------------------------------------------------------
-   Kleine Wrapper um querySelector / querySelectorAll,
-   damit der restliche Code kürzer und lesbarer bleibt.
-================================================================ */
+/* 4. DOM-HELFER
+*/
 
 // Gibt ein einzelnes Element zurück (erste Übereinstimmung)
 function getElement(selector) {
@@ -146,9 +137,8 @@ function formatNumber(value) {
 }
 
 
-/* ================================================================
-   5. PAGINATION – dynamische Punkte je nach Modus
-   ----------------------------------------------------------------
+/* 5. PAGINATION – dynamische Punkte je nach Modus
+
    Je nach aktivem Modus werden unterschiedlich viele Punkte
    angezeigt und ein anderer Punkt ist aktiv:
 
@@ -165,7 +155,7 @@ function formatNumber(value) {
    Jeder Map-Eintrag definiert:
    - dots:    wie viele Punkte insgesamt angezeigt werden
    - active:  welcher Punkt aktiv ist (0-basierter Index, -1 = keiner)
-================================================================ */
+*/
 const screenPaginationMap = {
     "start":            { dots: 0, active: -1 },
 
@@ -253,13 +243,11 @@ function showScreen(screenName) {
 }
 
 
-/* ================================================================
-   6. INPUTS LESEN
-   ----------------------------------------------------------------
+/* 6. INPUTS LESEN
    Liest die aktuellen Werte aus den drei Zahleneingabefeldern
    und schreibt sie in den App-State.
    Wird bei jeder Nutzeraktion aufgerufen, bevor die UI updatet.
-================================================================ */
+   */
 function updateStateFromInputs() {
     appState.people = Number(getElement("#people").value) || 1;
     appState.days   = Number(getElement("#days").value)   || 1;
@@ -267,16 +255,15 @@ function updateStateFromInputs() {
 }
 
 
-/* ================================================================
-   7. REZEPT WÄHLEN
-   ----------------------------------------------------------------
+/* 7. REZEPT WÄHLEN
+   
    Speichert das gewählte Rezept im State.
    Es gibt keine visuelle Markierung auf den Karten mehr –
    die Auswahl wirkt sich nur auf die Übersicht und den
    Machbarkeits-Check aus.
 
    Wird null übergeben → Auswahl im State zurücksetzen.
-================================================================ */
+   */
 function setSelectedRecipe(recipeName) {
 
     // Kein Rezept übergeben → Auswahl im State zurücksetzen
@@ -296,15 +283,13 @@ function setSelectedRecipe(recipeName) {
 }
 
 
-/* ================================================================
-   8. TAB WECHSELN
-   ----------------------------------------------------------------
+/* 8. TAB WECHSELN
    Setzt den aktiven Rezeptquellen-Tab (Browse all / Saved / History)
    und speichert die Auswahl im State.
    Aktiver Tab bekommt die Klasse .active.
    Im Single-Modus wird zusätzlich die Überschrift der Rezeptliste
    aktualisiert, damit sie dem gewählten Tab entspricht.
-================================================================ */
+   */
 function setRecipeSource(sourceName) {
     appState.source = sourceName;
 
@@ -319,12 +304,10 @@ function setRecipeSource(sourceName) {
 }
 
 
-/* ================================================================
-   9. UI AKTUALISIEREN
-   ----------------------------------------------------------------
+/* 9. UI AKTUALISIEREN
    Diese Funktionen lesen den aktuellen State und schreiben die
    Werte in die richtigen HTML-Elemente (über ihre IDs).
-================================================================ */
+   */
 
 // Aktualisiert den Filtertext auf Screen 4 (Select Recipe)
 function updateFilterText() {
@@ -441,11 +424,10 @@ function updateWholeInterface() {
 }
 
 
-/* ================================================================
+/* 
    10. AKTIONEN
-   ----------------------------------------------------------------
    Reaktionen auf konkrete Nutzeraktionen (Buttons mit data-action).
-================================================================ */
+ */
 
 // VERGLEICH: Prüft Machbarkeit und wechselt zum passenden Screen.
 // feasible = true → grüner Screen | false → roter Screen
@@ -486,9 +468,7 @@ function shareRecipe() {
 }
 
 
-/* ================================================================
-   11. EVENT LISTENER
-   ----------------------------------------------------------------
+/* 11. EVENT LISTENER
    Verbindet HTML-Elemente mit den JavaScript-Funktionen.
    Alle Interaktionen laufen über data-Attribute:
 
@@ -498,7 +478,7 @@ function shareRecipe() {
    data-source  → Rezeptquellen-Tab ("all", "saved", "history")
    data-action  → Aktion ("compare", "pick-different", "save", "share")
    data-reset   → "recipes" = Rezeptauswahl beim Navigieren zurücksetzen
-================================================================ */
+   */
 function registerEventListeners() {
 
     // NAVIGATIONS-BUTTONS (data-go): wechseln Screen, optional auch Modus/Rezept
@@ -565,9 +545,8 @@ function registerEventListeners() {
 }
 
 
-/* ================================================================
-   12. APP START
-   ----------------------------------------------------------------
+/* 12. APP START
+   
    Sobald das gesamte HTML geladen ist, wird die App initialisiert:
    - Event Listener registrieren
    - Standard-Tab aktivieren
@@ -576,7 +555,7 @@ function registerEventListeners() {
 
    selectedRecipe bleibt null → im Single-Modus ist beim ersten
    Öffnen von Screen 3 keine Karte vormarkiert.
-================================================================ */
+*/
 document.addEventListener("DOMContentLoaded", function () {
     registerEventListeners();
     setRecipeSource(appState.source);
