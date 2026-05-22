@@ -1,243 +1,138 @@
-/* ================================================================
-   LORD OF THE THINGS – Meal Planning
-   Datei: style.css · Design: Das Buch der Vorräte
-   ----------------------------------------------------------------
-   Ästhetik: Altes Pergament, Leder-Bucheinband, Ringschrift-Gold.
-   Inspiriert von den Archiven der Hobbits in Bag End –
-   gedämpfte Brauntöne, goldene Akzente, mittelalterliche Typografie.
-
-   Aufbau dieser Datei:
-   1. VARIABLEN        – Farben, Schriften, Abstände
-   2. RESET            – Browser-Standardstile neutralisieren
-   3. LAYOUT           – Seite und Bucheinband-Rahmen
-   4. SCREENS          – Sichtbarkeitssteuerung über JS-Klassen
-   5. STRUKTUR         – Status-Bar, Header, Content-Bereich
-   6. TYPOGRAFIE       – Labels, Hints, Info-Texte
-   7. BUTTONS          – Primary, Outline, Small, Back
-   8. FORMULARE        – Fieldset, Inputs, Zahlenfelder
-   9. TABS             – Rezeptquellen-Navigation
-   10. REZEPTLISTE     – Karten in der Rezeptauswahl
-   11. ÜBERSICHT       – Overview-Karte mit Mini-Statistiken
-   12. MACHBARKEIT     – Status-Karten, Tabellen, Feedback
-   13. PAGINATION      – Runen-Punkte Navigation
-================================================================ */
-
-
-/* ================================================================
-   1. VARIABLEN
-   ----------------------------------------------------------------
-   Pergament-Palette: warm, geerdet, alt.
-   Gold als einziger Akzent – sparsam eingesetzt wie echtes Gold.
-================================================================ */
+/* Globale Design-Variablen für das cleane, funktionale Wireframe-Look (Graustufen) */
 :root {
-    /* Pergament-Töne */
-    --parchment:          #f2e8d5;
-    --parchment-dark:     #e8d9bc;
-    --parchment-shadow:   #d4c4a0;
+    --text-dark: #111;
+    --text-muted: #555;
+    --border-color: #aaa;
+    --border-light: #ddd;
+    --bg-light: #f9f9f9;
+    --bg-active: #eee;
+    --font-stack: Arial, Helvetica, sans-serif;
 
-    /* Leder & Erde */
-    --leather:            #3d2b1f;
-    --leather-mid:        #5c3d2e;
-    --leather-light:      #8b5e3c;
+    /* Weiche, funktionale Signalfarben für die mathematischen Ergebnisse (UX-Vorgabe) */
+    --success-bg: #edf8ed;
+    --success-border: #9ccc9c;
+    --success-text: #2d5a1b;
 
-    /* Gold */
-    --gold:               #c9973a;
-    --gold-light:         #e8b84b;
-    --gold-dim:           #a07828;
-
-    /* Text */
-    --text-dark:          #2a1a0e;
-    --text-mid:           #5a3e28;
-    --text-muted:         #8a6a50;
-
-    /* Rahmen */
-    --border-color:       #b89a70;
-    --border-light:       #d4bc94;
-    --border-dark:        #7a5535;
-
-    /* Erfolg – Auenland-Grün */
-    --success-bg:         #dff0d0;
-    --success-border:     #8ab870;
-    --success-text:       #2d5a1b;
-
-    /* Fehler – Mordor-Rot */
-    --error-bg:           #f5ddd5;
-    --error-border:       #c07858;
-    --error-text:         #7a2010;
-
-    /* Aktiver Zustand */
-    --bg-active:          #ddd0b0;
-
-    /* Schriften */
-    --font-display:       'Cinzel', serif;
-    --font-body:          'Lato', sans-serif;
+    --error-bg: #faeeee;
+    --error-border: #d7a6a6;
+    --error-text: #9b2222;
 }
 
-
-/* ================================================================
-   2. RESET
-================================================================ */
+/* UNIVERSAL-RESET: Verhindert Layout-Verschiebungen durch standardmäßige Browser-Ränder */
 * {
     box-sizing: border-box;
-    margin:     0;
-    padding:    0;
+    margin: 0;
+    padding: 0;
 }
 
-
-/* ================================================================
-   3. LAYOUT – Hintergrund und Bucheinband
-================================================================ */
-
+/* BODY: Richtet das Handy-Gehäuse perfekt zentriert in der Mitte des Monitors aus */
 body {
-    background-color: var(--leather);
-    background-image:
-        repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 2px,
-            rgba(0,0,0,0.03) 2px,
-            rgba(0,0,0,0.03) 4px
-        ),
-        radial-gradient(ellipse at 20% 50%, rgba(92,61,46,0.4) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 20%, rgba(61,43,31,0.6) 0%, transparent 50%);
-    font-family:     var(--font-body);
-    color:           var(--text-dark);
-    display:         flex;
+    background-color: #f3f3f3;
+    font-family: var(--font-stack);
+    color: var(--text-dark);
+    display: flex;
     justify-content: center;
-    align-items:     flex-start;
-    padding:         30px 20px;
-    min-height:      100vh;
+    padding: 20px;
+    min-height: 100vh;
 }
 
+/* HANDY-SHELL: Die feste äußere Box, die ein Smartphone simuliert */
 .phone-shell {
-    background-color: var(--parchment);
-    background-image:
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='600'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='600' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E"),
-        linear-gradient(160deg, rgba(242,232,213,1) 0%, rgba(220,205,175,1) 50%, rgba(232,220,190,1) 100%);
-    width:          286px;
-    min-height:     520px;
-    border:         3px solid var(--gold-dim);
-    border-radius:  4px;
-    display:        flex;
-    flex-direction: column;
-    overflow:       hidden;
-    position:       relative;
-    box-shadow:
-        0 0 0 1px var(--leather-light),
-        0 0 0 5px var(--leather),
-        0 0 0 6px var(--gold-dim),
-        0 8px 32px rgba(0,0,0,0.6),
-        inset 0 1px 0 rgba(255,255,255,0.15);
+    background-color: #fff;
+    width: 286px;
+    height: 520px;
+    border: 1.5px solid #777;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column; /* Elemente stapeln sich exakt von oben nach unten */
+    overflow: hidden; /* Schneidet Inhalte ab, die über die Ecken runden hinausragen */
+    position: relative; /* Ermöglicht absolute Positionierung für Kindelemente (Notch) */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-.phone-shell::before {
-    content:    '';
-    position:   absolute;
-    top:        8px;
-    left:       12px;
-    right:      12px;
-    height:     1px;
-    background: linear-gradient(90deg, transparent, var(--gold-dim), var(--gold), var(--gold-dim), transparent);
-    z-index:    2;
+/* NOTCH: Der kleine schwarze Balken am oberen Rand des Displays */
+.notch {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    width: 44px;
+    height: 4px;
+    background: #ddd;
+    border-radius: 8px;
+    transform: translateX(-50%); /* Zieht das Element mathematisch exakt in die Mitte */
+    z-index: 3;
 }
 
-.phone-shell::after {
-    content:        '';
-    position:       absolute;
-    bottom:         30px;
-    left:           12px;
-    right:          12px;
-    height:         1px;
-    background:     linear-gradient(90deg, transparent, var(--gold-dim), var(--gold), var(--gold-dim), transparent);
-    z-index:        2;
-    pointer-events: none;
-}
+/* ==============================================================
+   STATE-NAVIGATION (GEÄNDERT FÜR JAVASCRIPT-STEUERUNG)
+   ============================================================== */
 
-
-/* ================================================================
-   4. SCREENS
-================================================================ */
+/* Blendet alle Screens standardmäßig im Browser aus */
 .screen {
-    display:        none;
-    flex:           1;
+    display: none;
+    height: 100%;
     flex-direction: column;
-    overflow:       hidden;
 }
 
+/* Nur die vom JavaScript zugewiesene Klasse .active-screen wird angezeigt */
 .screen.active-screen {
     display: flex;
 }
+/* ============================================================== */
 
-
-/* ================================================================
-   5. STRUKTUR
-================================================================ */
-
+/* STATUSBAR: Die obere Zeile für Uhrzeit und Netzanzeige */
 .status-bar {
-    display:         flex;
+    display: flex;
     justify-content: space-between;
-    padding:         10px 14px 6px;
-    font-size:       9px;
-    font-family:     var(--font-body);
-    font-weight:     300;
-    letter-spacing:  0.05em;
-    color:           var(--text-muted);
-    border-bottom:   1px solid var(--border-light);
-    margin-top:      16px;
+    padding: 8px 14px;
+    font-size: 10px;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-light);
+    margin-top: 15px; /* Verhindert Kollision mit der Notch */
 }
 
+/* APP-HEADER: Zentrierter Titelbereich */
 .app-header {
     text-align: center;
-    padding:    10px 0 8px;
+    padding: 10px 0;
 }
 
 .app-header h1 {
-    font-family:    var(--font-display);
-    font-size:      14px;
-    font-weight:    600;
-    letter-spacing: 0.15em;
-    color:          var(--leather);
-    text-transform: uppercase;
+    font-size: 16px;
 }
 
-.app-header h1::after {
-    content:    '';
-    display:    block;
-    width:      40px;
-    height:     1.5px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    margin:     4px auto 0;
-}
-
+/* APP-CONTENT: Der flexible Hauptbereich, in dem die UI scrollt */
 .app-content {
-    padding:         0 18px;
-    display:         flex;
-    flex-direction:  column;
-    gap:             10px;
-    flex-grow:       1;
-    overflow-y:      auto;
-    scrollbar-width: thin;
-    scrollbar-color: var(--parchment-shadow) transparent;
+    padding: 0 22px 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    flex-grow: 1; /* Beansprucht den gesamten Platz bis zum unteren Rand */
+    overflow-y: auto; /* Aktiviert den vertikalen Scrollbalken bei langen Listen */
+
+    /* Versteckt die Scrollbar in Firefox und Edge */
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
 }
 
+/* Versteckt die Scrollbar in Chrome, Safari und Opera */
+.app-content::-webkit-scrollbar {
+    display: none;
+}
+}
+
+/* Kompakterer Abstand für inhaltsreiche Ergebnis-Screens */
 .compact-content {
-    gap: 7px;
+    gap: 8px;
 }
 
-
-/* ================================================================
-   6. TYPOGRAFIE
-================================================================ */
-
+/* --- TYPOGRAFIE & TEXTELEMENTE --- */
 .label-title {
-    font-family:    var(--font-display);
-    font-size:      8px;
-    font-weight:    600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color:          var(--gold-dim);
-    display:        block;
-    margin-bottom:  5px;
+    font-size: 10px;
+    color: var(--text-muted);
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
 }
 
 .label-title--spaced {
@@ -245,562 +140,343 @@ body {
 }
 
 .hint {
-    font-family: var(--font-body);
-    font-style:  italic;
-    font-weight: 300;
-    font-size:   8px;
-    color:       var(--text-muted);
-    display:     block;
-    margin-top:  3px;
-    text-align:  center;
-}
-
-.inventory-info,
-.filter-text {
-    font-family:    var(--font-body);
-    font-size:      8px;
-    font-style:     italic;
-    text-align:     center;
-    color:          var(--text-muted);
-    margin-bottom:  6px;
-    letter-spacing: 0.02em;
-}
-
-
-/* ================================================================
-   7. BUTTONS
-================================================================ */
-
-button,
-.btn-small,
-.tab-btn {
-    text-decoration: none;
-    font-family:     var(--font-body);
-    display:         inline-flex;
-    justify-content: center;
-    align-items:     center;
-    cursor:          pointer;
-    box-sizing:      border-box;
-    transition:      background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
-}
-
-.btn-primary {
-    width:          100%;
-    padding:        9px 10px;
-    font-family:    var(--font-display);
-    font-size:      8.5px;
-    font-weight:    600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    background:     var(--parchment-dark);
-    border:         1px solid var(--border-color);
-    border-radius:  2px;
-    color:          var(--text-mid);
-    text-align:     center;
-    box-shadow:     inset 0 1px 0 rgba(255,255,255,0.4), 0 1px 2px rgba(0,0,0,0.1);
-}
-
-.btn-primary:hover {
-    background:   var(--bg-active);
-    border-color: var(--gold-dim);
-    color:        var(--leather);
-}
-
-.btn-outline {
-    width:          100%;
-    padding:        9px 10px;
-    font-family:    var(--font-display);
-    font-size:      8.5px;
-    font-weight:    600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    background:     var(--parchment);
-    border:         2px solid var(--border-color);
-    border-radius:  2px;
-    color:          var(--text-mid);
-    box-shadow:     inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 2px rgba(0,0,0,0.08);
-}
-
-.btn-outline:hover {
-    background:   var(--parchment-dark);
-    border-color: var(--gold);
-    color:        var(--leather);
-}
-
-.btn-back {
-    width:           100%;
-    padding:         8px 10px;
-    font-family:     var(--font-body);
-    font-size:       9px;
-    font-style:      italic;
-    font-weight:     300;
-    letter-spacing:  0.03em;
-    background:      transparent;
-    border:          2px solid var(--border-light);
-    border-radius:   2px;
-    color:           var(--text-muted);
-    text-decoration: none;
-    display:         flex;
-    justify-content: center;
-    align-items:     center;
-    gap:             6px;
-}
-
-.btn-back:hover {
-    background:   rgba(212,188,148,0.3);
-    border-color: var(--border-color);
-    color:        var(--text-mid);
-}
-
-.btn-back .icon {
     font-size: 9px;
-    color:     var(--gold-dim);
-}
-
-.btn-small {
-    padding:        3px 8px;
-    font-family:    var(--font-display);
-    font-size:      7.5px;
-    font-weight:    600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    border:         1px solid var(--border-color);
-    border-radius:  2px;
-    color:          var(--text-mid);
-    background:     var(--parchment);
-    box-shadow:     inset 0 1px 0 rgba(255,255,255,0.4);
-}
-
-.btn-small:hover {
-    background:   var(--parchment-dark);
-    border-color: var(--gold-dim);
-}
-
-.mt-auto {
-    margin-top:    auto;
-    margin-bottom: 16px;
-}
-
-
-/* ================================================================
-   8. FORMULARE
-================================================================ */
-
-fieldset {
-    border:  none;
-    padding: 0;
-    margin:  0;
-}
-
-legend {
-    padding: 0;
-}
-
-.button-row {
-    display: flex;
-    gap:     8px;
-}
-
-.mode-option {
-    flex:       1;
+    color: var(--text-muted);
+    display: block;
+    margin-top: 4px;
     text-align: center;
 }
 
-.input-group-row {
-    display:    flex;
-    gap:        8px;
-    margin-top: 5px;
+.inventory-info, .filter-text {
+    font-size: 9px;
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 10px;
 }
 
-.input-field {
-    flex:            1;
-    display:         flex;
-    flex-direction:  column;
-    justify-content: space-between;
-}
-
-.input-field label {
-    font-family:    var(--font-body);
-    font-size:      8px;
-    font-weight:    300;
-    letter-spacing: 0.03em;
-    color:          var(--text-muted);
-    margin-bottom:  3px;
-}
-
-.input-field input {
-    width:       100%;
-    height:      34px;
-    padding:     0 6px;
-    border:      1px solid var(--border-color);
-    border-radius: 2px;
-    font-family: var(--font-display);
-    font-size:   11px;
-    font-weight: 400;
-    color:       var(--text-dark);
-    background:  var(--parchment);
-    text-align:  center;
-    box-shadow:  inset 0 1px 3px rgba(0,0,0,0.08);
-    transition:  border-color 0.15s;
-}
-
-.input-field input:focus {
-    outline:      none;
-    border-color: var(--gold-dim);
-}
-
-.input-field input[type="number"]::-webkit-inner-spin-button,
-.input-field input[type="number"]::-webkit-outer-spin-button {
-    opacity: 1;
-}
-
-
-/* ================================================================
-   9. TABS
-================================================================ */
-
-.tab-nav {
-    display:    flex;
-    gap:        5px;
-    margin-top: 7px;
-}
-
-.tab-btn {
-    flex:           1;
-    font-family:    var(--font-display);
-    font-size:      7px;
-    font-weight:    600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding:        5px 0;
-    border:         1px solid var(--border-color);
-    border-radius:  2px;
-    background:     var(--parchment);
-    color:          var(--text-muted);
-    transition:     all 0.15s;
-}
-
-.tab-btn:hover {
-    background:   var(--parchment-dark);
-    border-color: var(--gold-dim);
-    color:        var(--text-mid);
-}
-
-.tab-btn.active {
-    background:    var(--bg-active);
-    border-color:  var(--gold-dim);
-    color:         var(--leather);
-    border-bottom: 2px solid var(--gold);
-}
-
-
-/* ================================================================
-   10. REZEPTLISTE
-================================================================ */
-
-.recipe-list-container {
-    display:        flex;
-    flex-direction: column;
-    gap:            6px;
-}
-
-.recipe-item {
-    border:          1px solid var(--border-color);
-    border-radius:   2px;
-    padding:         7px 8px;
-    display:         flex;
-    justify-content: space-between;
-    align-items:     center;
-    background:      var(--parchment);
-    box-shadow:      inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 2px rgba(0,0,0,0.06);
-    transition:      border-color 0.15s;
-}
-
-.recipe-item:hover {
-    border-color: var(--gold-dim);
-}
-
-.recipe-info strong {
-    font-family:    var(--font-display);
-    font-size:      9px;
-    font-weight:    600;
-    letter-spacing: 0.05em;
-    color:          var(--text-dark);
-    display:        block;
-    margin-bottom:  2px;
-}
-
-.recipe-info .hint {
-    text-align: left;
-    margin-top: 0;
-}
-
-
-/* ================================================================
-   11. ÜBERSICHT
-================================================================ */
-
+/* --- CARDS (Karten-Strukturelemente) --- */
 .card {
-    border-radius: 2px;
-    padding:       9px;
-    background:    var(--parchment-dark);
-    border:        1px solid var(--border-color);
-    box-shadow:    inset 0 1px 0 rgba(255,255,255,0.4), 0 1px 3px rgba(0,0,0,0.07);
-}
-
-.overview-card {
-    border-color: var(--border-color);
-    background:   var(--parchment-dark);
-    padding:      10px;
+    border: 1px solid var(--border-color);
+    border-radius: 7px;
+    padding: 10px;
+    background-color: #fff;
 }
 
 .card-header {
-    display:         flex;
+    display: flex;
     justify-content: space-between;
-    align-items:     center;
+    align-items: center;
 }
 
 .card-header strong {
-    font-family:    var(--font-display);
-    font-size:      10px;
-    font-weight:    600;
-    letter-spacing: 0.06em;
-    color:          var(--text-dark);
+    font-size: 11px;
 }
 
+/* OVERVIEW-CARD: Spezifisches Styling für Screen 5 & 6 */
 .overview-topline {
-    display:         flex;
+    display: flex;
     justify-content: space-between;
-    align-items:     flex-start;
-    margin-bottom:   4px;
 }
 
 .source-label {
-    font-family: var(--font-body);
-    font-style:  italic;
-    font-size:   8px;
-    color:       var(--text-muted);
-}
-
-.overview-card > strong {
-    font-family:    var(--font-display);
-    font-size:      13px;
-    font-weight:    700;
-    letter-spacing: 0.08em;
-    color:          var(--leather);
-    display:        block;
-    line-height:    1.3;
+    font-size: 9px;
+    color: var(--text-muted);
 }
 
 .overview-hint {
-    text-align:    left;
-    margin-bottom: 8px;
-    margin-top:    2px;
+    text-align: left;
 }
 
+/* Das dreispaltige Raster für Servings, Days und Buffer */
 .overview-meta {
     display: flex;
-    gap:     6px;
-    margin:  8px 0;
+    gap: 8px;
+    margin: 10px 0;
 }
 
 .mini-stat {
-    flex:          1;
-    border:        1px solid var(--border-color);
-    border-radius: 2px;
-    padding:       5px 4px;
-    text-align:    center;
-    background:    var(--parchment);
-    box-shadow:    inset 0 1px 0 rgba(255,255,255,0.5);
+    flex: 1;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 6px;
+    text-align: center;
 }
 
 .mini-stat span {
-    display:        block;
-    font-family:    var(--font-display);
-    font-size:      6.5px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color:          var(--gold-dim);
-    margin-bottom:  2px;
+    font-size: 8px;
+    color: var(--text-muted);
+    display: block;
 }
 
 .mini-stat strong {
-    font-family: var(--font-display);
-    font-size:   12px;
-    font-weight: 600;
-    color:       var(--text-dark);
+    font-size: 14px;
 }
 
-.compact-overview {
-    margin-top: 40px;
+/* --- ALLGEMEINE BUTTONS --- */
+button, .btn-small, .tab-btn, .btn-back {
+    font-family: inherit;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }
 
+.btn-primary, .btn-outline {
+    width: 100%;
+    padding: 10px;
+    font-weight: bold;
+    background-color: #fff;
+    border: 1px solid #777;
+    border-radius: 5px;
+    color: var(--text-dark);
+    font-size: 10px;
+    text-align: center;
+}
 
-/* ================================================================
-   12. MACHBARKEIT
-================================================================ */
+.btn-outline.active {
+    background-color: var(--bg-active);
+}
 
+/* BACK-BUTTON: Cleane Box über die volle Breite, identisch zu den Rezepten */
+.btn-back {
+    width: 100%;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    color: var(--text-dark);
+    font-size: 11px;
+    font-weight: bold;
+    text-decoration: none;
+    gap: 6px;
+}
+
+.btn-back:hover, .btn-primary:hover, .btn-outline:hover {
+    background-color: var(--bg-active);
+}
+
+.btn-small {
+    padding: 4px 8px;
+    font-size: 9px;
+    border: 1px solid #777;
+    border-radius: 5px;
+    color: var(--text-dark);
+    background-color: #fff;
+}
+
+.btn-small.active {
+    background-color: var(--bg-active);
+}
+
+/* Drückt Elemente (z.B. den Back-Button) flexibel ganz nach unten */
+.mt-auto {
+    margin-top: auto;
+    margin-bottom: 20px;
+}
+
+/* --- FORMULARE & INPUT-LOGIK --- */
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+legend { padding: 0; }
+
+.button-row { display: flex; gap: 8px; }
+
+.mode-option { flex: 1; text-align: center; }
+
+.input-group-row { display: flex; gap: 9px; margin-top: 5px; }
+
+.input-field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Hält alle Nummern-Boxen starr auf einer Linie */
+}
+
+.input-field label {
+    font-size: 9px;
+    color: var(--text-muted);
+    margin-bottom: 3px;
+}
+
+.input-field input {
+    width: 100%;
+    height: 36px;
+    padding: 0 8px;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    font-size: 10px;
+    text-align: center;
+}
+
+/* --- TAB-NAVIGATION --- */
+.tab-nav { display: flex; gap: 7px; margin-top: 8px; }
+
+.tab-btn {
+    flex: 1;
+    font-size: 9px;
+    padding: 6px 0;
+    border: 1px solid #777;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.tab-btn.active {
+    background-color: var(--bg-active);
+}
+
+/* --- REZEPTLISTE (Cards auf Screen 3 & 4) --- */
+.recipe-list-container { display: flex; flex-direction: column; gap: 0px; }
+
+.recipe-item {
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.recipe-item.selected { background-color: var(--bg-active); }
+
+.recipe-info strong { font-size: 10px; display: block; margin-bottom: 2px; }
+
+.recipe-info .hint { text-align: left; margin-top: 0; }
+
+/* --- ERGEBNIS-SCREENS (Feasibility-Zustände) --- */
 .status-card {
-    border:        1px solid var(--border-color);
-    border-radius: 2px;
-    padding:       9px 10px;
-    text-align:    center;
-    background:    var(--parchment-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 12px;
+    text-align: center;
 }
 
 .status-card strong {
-    font-family:    var(--font-display);
-    font-size:      12px;
-    font-weight:    700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    display:        block;
-    margin-bottom:  3px;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 4px;
 }
 
-.status-card span,
-.status-card p {
-    font-family: var(--font-body);
-    font-size:   9px;
-    font-style:  italic;
-    line-height: 1.4;
-    color:       var(--text-mid);
+.status-card p, .status-card span {
+    font-size: 10px;
 }
 
+/* Farbliche Zustände für Machbarkeit */
 .status-card.success {
     background-color: var(--success-bg);
-    border-color:     var(--success-border);
-}
-
-.status-card.success strong {
+    border-color: var(--success-border);
     color: var(--success-text);
 }
 
 .status-card.error {
     background-color: var(--error-bg);
-    border-color:     var(--error-border);
-}
-
-.status-card.error strong {
+    border-color: var(--error-border);
     color: var(--error-text);
 }
 
-.positive-value {
-    color:       var(--success-text);
-    font-weight: 700;
+.decision-summary {
+    font-size: 10px;
+    line-height: 1.4;
 }
 
-.missing-value {
-    color:       var(--error-text);
-    font-weight: 700;
-}
-
+/* FEEDBACK-TEXTE (Screen 9): Ein-/Ausblenden gesteuert durch logic.js (.visible) */
 .feedback-message {
-    font-family:    var(--font-display);
-    font-size:      8.5px;
-    letter-spacing: 0.08em;
-    font-weight:    600;
-    color:          var(--success-text);
-    margin-left:    2px;
-    display:        none;
-    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: bold;
+    color: var(--success-text);
+    text-align: center;
+    display: none;
 }
 
 .feedback-message.visible {
     display: block;
 }
 
-.decision-summary p {
-    font-family: var(--font-body);
-    font-size:   8.5px;
-    font-style:  italic;
-    line-height: 1.5;
-    color:       var(--text-mid);
-}
-
+/* MATHEMATISCHE VERGLEICHSTABELLE */
 .table-card {
-    border:     1px solid var(--border-light);
-    padding:    7px;
-    background: var(--parchment);
+    background-color: #fff;
 }
 
 .comparison-table {
-    width:           100%;
+    width: 100%;
     border-collapse: collapse;
-    font-size:       7.5px;
+    font-size: 9px;
 }
 
 .comparison-table th {
-    font-family:    var(--font-display);
-    font-size:      6.5px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color:          var(--gold-dim);
-    padding:        3px 2px 4px;
-    border-bottom:  1.5px solid var(--border-color);
-    text-align:     right;
+    border-bottom: 2px solid var(--border-color);
+    padding: 4px;
+    text-align: center;
+    color: var(--text-muted);
 }
 
-.comparison-table th:first-child {
-    text-align: left;
+.comparison-table th:first-child, .comparison-table td:first-child {
+    text-align: center; 
 }
 
 .comparison-table td {
-    font-family:   var(--font-body);
-    padding:       3px 2px;
+    padding: 5px 4px;
     border-bottom: 1px solid var(--border-light);
-    text-align:    right;
-    color:         var(--text-mid);
 }
 
-.comparison-table td:first-child {
-    text-align: left;
-    color:      var(--text-dark);
-    font-style: italic;
+/* Modifikatoren für Spaltenwerte innerhalb der Tabellenzeilen (von JS gesetzt) */
+.missing-value {
+    color: var(--error-text);
+    font-weight: bold;
 }
 
-.action-grid {
+.positive-value {
+    color: var(--success-text);
+}
+
+/* Hilfs-Layout für zweispaltige Buttonanordnungen */
+.action-grid.two-columns {
     display: flex;
-    gap:     6px;
+    gap: 8px;
 }
 
-.two-columns > * {
-    flex: 1;
-}
-
+/* Blendet Elemente (wie den Adjust-Button im Single Mode) über JS aus */
 .hidden {
-    display: none;
+    display: none !important;
 }
 
-
-/* ================================================================
-   13. PAGINATION – Goldene Wachssiegel
-================================================================ */
-
+/* --- PAGINATION (Zustandspunkte am unteren Ende) --- */
 .pagination {
-    padding:         10px 0;
-    width:           100%;
-    display:         flex;
+    margin-top: auto;
+    padding-top: 10px;
+    padding-bottom: 15px;
+    width: 100%;
+    display: flex;
     justify-content: center;
-    gap:             7px;
-    flex-shrink:     0;
-    border-top:      1px solid var(--border-light);
-    background:      linear-gradient(180deg, var(--parchment) 0%, var(--parchment-dark) 100%);
+    gap: 6px;
+    border-top: 1px solid var(--border-light);
 }
 
 .dot {
-    width:         6px;
-    height:        6px;
-    background:    var(--parchment-shadow);
+    width: 6px;
+    height: 6px;
+    background-color: #d7d7d7;
     border-radius: 50%;
-    display:       inline-block;
-    border:        1px solid var(--border-color);
-    transition:    all 0.2s ease;
+    display: inline-block;
 }
 
 .dot.active {
-    background:   var(--gold);
-    border-color: var(--gold-dim);
-    box-shadow:   0 0 4px rgba(201,151,58,0.6);
+    background-color: #333;
 }
 
+/* ==============================================================
+   UX-FIX: Desktop-Pfeile in Nummernfeldern ausblenden (Mobile-Sim)
+   ============================================================== */
+.input-field input[type="number"]::-webkit-outer-spin-button,
+.input-field input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.input-field input[type="number"] {
+    -moz-appearance: textfield;
+}
