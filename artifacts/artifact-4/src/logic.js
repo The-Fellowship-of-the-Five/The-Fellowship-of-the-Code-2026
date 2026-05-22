@@ -62,9 +62,9 @@ const recipes = {
         description:  "portable but limited warmth and variety",
         overviewText: "Portable meal",
         requirements: {
-            "Potatoes":    3.0,
+            "Potatoes":    6.0,
             "Rabbit meat": 2.0,
-            "Carrots":     1.0,
+            "Carrots":     2.5,
             "Herbs":       0.1,
             "Salt":        0.05,
             "Water":       1.5
@@ -76,7 +76,7 @@ const recipes = {
         overviewText: "Protein-heavy option",
         requirements: {
             "Potatoes":    3.0,
-            "Rabbit meat": 2.0,
+            "Rabbit meat": 4.0,
             "Carrots":     1.0,
             "Herbs":       0.1,
             "Salt":        0.05,
@@ -459,9 +459,9 @@ function compareRequirementAndInventory() {
 
     updateWholeInterface();
 
-    const recipe = recipes[appState.selectedRecipe];
-    const isFeasible = rows.every(function(row) { return row.missing === 0;});
-    showScreen(isFeasable ? "feasibility-ok" : "feasibility-not");
+    const rows = calculateComparison(sharedInventory);
+    const isFeasible = rows.every(function (row) { return row.missing === 0; });
+    showScreen(isFeasible ? "feasibility-ok" : "feasibility-not");
 }
 
 // ANDERES REZEPT WÄHLEN: Navigiert je nach Modus zum richtigen Screen.
