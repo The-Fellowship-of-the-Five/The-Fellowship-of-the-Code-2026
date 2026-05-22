@@ -25,7 +25,7 @@
     padding: 0;
 }
 
-/* BODY: Richtet das Handy-Gehäuse perfekt zentriert in der Mitte des Monitors aus */
+/* BODY: Richtet das Handy-Gehäuse zentriert in der Mitte des Monitors aus */
 body {
     background-color: #f3f3f3;
     font-family: var(--font-stack);
@@ -63,9 +63,7 @@ body {
     z-index: 3;
 }
 
-/* ==============================================================
-   STATE-NAVIGATION (GEÄNDERT FÜR JAVASCRIPT-STEUERUNG)
-   ============================================================== */
+/* STATE-NAVIGATION (GEÄNDERT FÜR JAVASCRIPT-STEUERUNG) */
 
 /* Blendet alle Screens standardmäßig im Browser aus */
 .screen {
@@ -78,7 +76,6 @@ body {
 .screen.active-screen {
     display: flex;
 }
-/* ============================================================== */
 
 /* STATUSBAR: Die obere Zeile für Uhrzeit und Netzanzeige */
 .status-bar {
@@ -126,7 +123,7 @@ body {
     gap: 8px;
 }
 
-/* --- TYPOGRAFIE & TEXTELEMENTE --- */
+/* TYPOGRAFIE & TEXTELEMENTE */
 .label-title {
     font-size: 10px;
     color: var(--text-muted);
@@ -154,7 +151,7 @@ body {
     margin-bottom: 10px;
 }
 
-/* --- CARDS (Karten-Strukturelemente) --- */
+/* CARDS (Karten-Strukturelemente) */
 .card {
     border: 1px solid var(--border-color);
     border-radius: 7px;
@@ -212,7 +209,7 @@ body {
     font-size: 14px;
 }
 
-/* --- ALLGEMEINE BUTTONS --- */
+/* ALLGEMEINE BUTTONS */
 button, .btn-small, .tab-btn, .btn-back {
     font-family: inherit;
     display: inline-flex;
@@ -237,7 +234,7 @@ button, .btn-small, .tab-btn, .btn-back {
     background-color: var(--bg-active);
 }
 
-/* BACK-BUTTON: Cleane Box über die volle Breite, identisch zu den Rezepten */
+/* BACK-BUTTON */
 .btn-back {
     width: 100%;
     padding: 10px;
@@ -274,7 +271,7 @@ button, .btn-small, .tab-btn, .btn-back {
     margin-bottom: 20px;
 }
 
-/* --- FORMULARE & INPUT-LOGIK --- */
+/* FORMULARE & INPUT-LOGIK */
 fieldset {
     border: none;
     padding: 0;
@@ -293,7 +290,7 @@ legend { padding: 0; }
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Hält alle Nummern-Boxen starr auf einer Linie */
+    justify-content: space-between; 
 }
 
 .input-field label {
@@ -312,7 +309,7 @@ legend { padding: 0; }
     text-align: center;
 }
 
-/* --- TAB-NAVIGATION --- */
+/* TAB-NAVIGATION */
 .tab-nav { display: flex; gap: 7px; margin-top: 8px; }
 
 .tab-btn {
@@ -328,7 +325,7 @@ legend { padding: 0; }
     background-color: var(--bg-active);
 }
 
-/* --- REZEPTLISTE (Cards auf Screen 3 & 4) --- */
+/* REZEPTLISTE (Cards auf Screen 3 & 4) */
 .recipe-list-container { display: flex; flex-direction: column; gap: 0px; }
 
 .recipe-item {
@@ -347,7 +344,7 @@ legend { padding: 0; }
 
 .recipe-info .hint { text-align: left; margin-top: 0; }
 
-/* --- ERGEBNIS-SCREENS (Feasibility-Zustände) --- */
+/* ERGEBNIS-SCREENS (Feasibility-Zustände) */
 .status-card {
     border: 1px solid var(--border-color);
     border-radius: 5px;
@@ -468,9 +465,7 @@ legend { padding: 0; }
     background-color: #333;
 }
 
-/* ==============================================================
-   UX-FIX: Desktop-Pfeile in Nummernfeldern ausblenden (Mobile-Sim)
-   ============================================================== */
+/* UX-FIX: Desktop-Pfeile in Nummernfeldern ausblenden */
 .input-field input[type="number"]::-webkit-outer-spin-button,
 .input-field input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
