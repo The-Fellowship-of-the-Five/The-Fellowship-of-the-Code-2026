@@ -99,10 +99,12 @@ Go to Chapter V →
 
 ## Changelog:  
 ### [1.0.7] - 23.05.2026
+### Added
+ - Chapter IV added and filled
+
 ### Changed
  - Bugs/Bad code rewritten
  - CSS improved
- - Chapter IV added
 
 ### [1.0.6] - 22.05.2026
 ### Added
