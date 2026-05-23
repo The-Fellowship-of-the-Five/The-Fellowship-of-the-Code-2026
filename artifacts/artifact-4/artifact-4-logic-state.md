@@ -60,6 +60,7 @@ The flow from Assignment 2 is preserved. Selecting *single* vs. *multi* mode set
 
 ### What did we deliberately not implement yet?
 
+- Backend calculations: As of now adding more people, days or buffer days to the parameters will not change the amount of food necessary to complete a recipe. 
 - Real persistence: `saved` and `shared` are state flags only, nothing is written to storage or sent anywhere yet.
 - Inventory sync, map, threats and task tracker: Remain out of scope, exactly as defined for this single capability.
 - No new visuals: The interface reuses the plain visual design from Assignment 3 (system font, neutral palette), Assignment 4 only adds behavior, state and the result screens already defined in the Assignment 2 wireframe.
