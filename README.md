@@ -99,6 +99,16 @@ Go to Chapter V →
 
 ## Changelog:  
 
+### [1.0.6] - 23.05.2026
+### Changed
+ - Bugs/Bad code rewritten
+ - CSS improved
+
+### [1.0.6] - 22.05.2026
+### Added
+ - Artifact 4 prototype
+ - Html, JS, CSS including further improvements
+
 ### [1.0.5] - 07.05.2026
 ### Added
  - Chapter III of the Redbook filled
