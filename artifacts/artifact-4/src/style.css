@@ -209,6 +209,10 @@ body {
     font-size: 14px;
 }
 
+/* Fixer Abstand vom Compare-Button nach oben */
+.overview-card .btn-primary {
+    margin-top: 10px;
+}
 /* ALLGEMEINE BUTTONS */
 button, .btn-small, .tab-btn, .btn-back {
     font-family: inherit;
