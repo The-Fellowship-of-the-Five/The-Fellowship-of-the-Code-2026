@@ -65,7 +65,7 @@ Go to Chapter III → [Making It Visible](https://github.com/The-Fellowship-of-t
 4. **Chapter IV - When Things React**  
    *“Even the wise cannot see all ends.” - Gandalf*
 
-Go to Chapter IV →
+Go to Chapter IV → [When Things React](https://github.com/The-Fellowship-of-the-Five/The-Fellowship-of-the-Code-2026/blob/main/chapters/Chapter%20IV%20-%20When%20Things%20React.md)
 
 5. **Chapter V - The Tale Continues**  
    *“The tale grew in the telling.” - Bilbo*
