@@ -68,7 +68,8 @@ body {
 /* Blendet alle Screens standardmäßig im Browser aus */
 .screen {
     display: none;
-    height: 100%;
+    flex: 1;            /* statt height: 100% — teilt sich den Platz mit dem Footer */
+    min-height: 0;      /* erlaubt dem inneren Scrollbereich zu schrumpfen */
     flex-direction: column;
 }
 
