@@ -1,6 +1,5 @@
 # Reading the Runes – Code Analysis
-
-> File: `materials/reading-the-runes.html` · App: *Hobbit Rations Tracker*
+---
 
 ## 1. What the Application Is Supposed to Do
 
