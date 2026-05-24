@@ -1,97 +1,97 @@
 # Reading the Runes – Code Analysis
 
-> Datei: `materials/reading-the-runes.html` · App: *Hobbit Rations Tracker*
+> File: `materials/reading-the-runes.html` · App: *Hobbit Rations Tracker*
 
-## 1. Was die Anwendung tun soll
+## 1. What the Application Is Supposed to Do
 
-Die Anwendung ist ein kleiner Vorrats-Tracker. Der Nutzer gibt eine Zahl in ein Eingabefeld ein und drückt entweder **Add Rations**, um Rationen hinzuzufügen, oder **Eat Rations**, um Rationen zu verbrauchen. Nach jeder Interaktion soll der angezeigte Vorrat (`Rations available: …`) den korrekten neuen Wert zeigen.
+The application is a small rations tracker. The user enters a number into an input field and presses either **Add Rations** to add rations or **Eat Rations** to consume rations. After each interaction, the displayed supply (`Rations available: …`) should show the correct new value.
 
-Der Code ist kurz (~40 Zeilen), enthält aber mehrere zusammenhängende Fehler rund um **Datentypen**, **Ausführungsreihenfolge** und **State-Konsistenz**. Genau diese Klasse von Fehlern wird in größeren Systemen teuer – deshalb lohnt sich der genaue Blick.
+The code is short (~40 lines) but contains several interconnected bugs around **data types**, **execution order**, and **state consistency**. This exact class of bugs becomes expensive in larger systems — which is why a close look is worthwhile.
 
 ---
 
-## 2. Identifizierte Probleme
+## 2. Identified Problems
 
-### Problem 1 — Falscher Datentyp + Typ-Wechsel zur Laufzeit (der eigentliche Kernfehler)
+### Problem 1 — Wrong Data Type + Type Switching at Runtime (the actual core bug)
 
-**Wo:**
+**Where:**
 ```javascript
-let rations = "10";              // initialer Wert ist ein String
+let rations = "10";              // initial value is a string
 // ...
-rations = rations + value;       // im Add-Listener
+rations = rations + value;       // in the Add listener
 ```
 
-**Was beabsichtigt ist:**
-`rations` soll eine Zahl sein. Bei *Add* soll der eingegebene Wert mathematisch addiert werden (10 + 8 = 18).
+**What it is intended to do:**
+`rations` should be a number. On *Add*, the entered value should be added mathematically (10 + 8 = 18).
 
-**Was tatsächlich passiert:**
-`rations` ist von Beginn an ein **String** (`"10"`), und `amountInput.value` liefert ebenfalls immer einen String. Der `+`-Operator bedeutet bei Strings **Konkatenation**, nicht Addition. Aus `"10" + "8"` wird also `"108"`, nicht `18`. Mit jedem Klick wächst der String weiter: `"108"` → `"1084"` → …
+**What actually happens:**
+`rations` is a **string** from the start (`"10"`), and `amountInput.value` also always returns a string. For strings, the `+` operator means **concatenation**, not addition. So `"10" + "8"` becomes `"108"`, not `18`. With each click, the string grows further: `"108"` → `"1084"` → …
 
-Der subtile, oft übersehene Teil: Im *Eat*-Listener steht `rations - value`. Der `-`-Operator existiert für Strings **nicht**, also wandelt JavaScript beide Werte automatisch (Type Coercion) in Numbers um. Das Ergebnis von `rations = rations - value` ist dadurch plötzlich ein **Number**. Der Typ von `rations` hängt also davon ab, **welchen Button man zuletzt gedrückt hat**:
+The subtle, often-overlooked part: the *Eat* listener uses `rations - value`. The `-` operator does **not** exist for strings, so JavaScript automatically converts both values into numbers (type coercion). As a result, `rations = rations - value` suddenly produces a **number**. The type of `rations` therefore depends on **which button was pressed last**:
 
-| Aktion | Operator | `rations` danach | Typ |
+| Action | Operator | `rations` after | Type |
 |---|---|---|---|
 | Start | – | `"10"` | string |
-| Add 8 | `+` (Konkatenation) | `"108"` | string |
-| Eat 3 | `-` (Coercion) | `105` | number |
-| Add 8 | `+` (Konkatenation) | `"1058"` | string |
+| Add 8 | `+` (concatenation) | `"108"` | string |
+| Eat 3 | `-` (coercion) | `105` | number |
+| Add 8 | `+` (concatenation) | `"1058"` | string |
 
-Die Variable wechselt also unkontrolliert zwischen `string` und `number` hin und her – derselbe Code verhält sich je nach Vorgeschichte unterschiedlich.
+The variable thus switches uncontrollably back and forth between `string` and `number` — the same code behaves differently depending on its history.
 
 ---
 
-### Problem 2 — UI wird vor der Zustandsänderung aktualisiert (falsche Reihenfolge)
+### Problem 2 — UI Is Updated Before the State Change (wrong order)
 
-**Wo:**
+**Where:**
 ```javascript
 eatButton.addEventListener("click", () => {
   const value = amountInput.value;
-  updateStatus();                  // ← läuft, BEVOR rations verändert wird
+  updateStatus();                  // ← runs BEFORE rations is changed
   if (rations - value < 0) {
     alert("Not enough rations!");
   } else {
-    rations = rations - value;     // Änderung passiert erst hier
+    rations = rations - value;     // the change happens only here
   }
 });
 ```
 
-**Was beabsichtigt ist:**
-Erst prüfen und den Vorrat abziehen, **dann** die Anzeige aktualisieren, damit der Nutzer den korrekten Reststand sieht.
+**What it is intended to do:**
+First validate and subtract from the supply, **then** update the display, so the user sees the correct remaining amount.
 
-**Was tatsächlich passiert:**
-`updateStatus()` wird am Anfang aufgerufen, also bevor `rations` überhaupt verändert wurde. Die Anzeige zeigt daher immer den **vorherigen** Stand. Drückt man *Eat* mit 3 (Start: 10), zeigt die UI weiterhin `10` an, obwohl intern bereits `7` korrekt wäre. Erst beim **nächsten** Klick „holt" die Anzeige den vorigen Wert nach – die UI hinkt dem echten Zustand immer einen Schritt hinterher.
+**What actually happens:**
+`updateStatus()` is called at the beginning, i.e. before `rations` is changed at all. The display therefore always shows the **previous** value. If you press *Eat* with 3 (start: 10), the UI still shows `10`, even though `7` would already be correct internally. Only on the **next** click does the display "catch up" to the previous value — the UI always lags one step behind the real state.
 
-Zusätzlich greift die Validierung `rations - value < 0` auf den noch nicht aktualisierten Wert zu, was die Verwirrung verstärkt: Anzeige, interner Zustand und Prüfung laufen auseinander.
-
----
-
-### Problem 3 — Fehlende Eingabevalidierung (Folgefehler)
-
-**Wo:** Beide Listener nehmen `amountInput.value` direkt und ungeprüft.
-
-**Was tatsächlich passiert:**
-Bei leerem Feld ist `value` ein leerer String `""`; bei Buchstaben (z. B. `"abc"`) wird daraus `NaN`, sobald gerechnet wird. `NaN` „infiziert" anschließend jede weitere Rechnung – `rations` wird dauerhaft `NaN` und lässt sich nicht mehr reparieren, ohne die Seite neu zu laden. Auch negative Eingaben werden akzeptiert und kehren die Bedeutung der Buttons um (negativ „essen" = hinzufügen).
+In addition, the validation `rations - value < 0` accesses the not-yet-updated value, which compounds the confusion: display, internal state, and validation drift apart.
 
 ---
 
-## 3. Warum das wichtig ist
+### Problem 3 — Missing Input Validation (follow-up bug)
 
-**Nutzererfahrung.** Der Tracker liefert sichtbar falsche Zahlen (`108` statt `18`) und eine Anzeige, die dem echten Stand hinterherhinkt. Der Nutzer trifft Entscheidungen auf Basis falscher Informationen und verliert das Vertrauen in die Anwendung – bei einem Vorrats-Tracker ist die korrekte Zahl der einzige Zweck der App.
+**Where:** Both listeners take `amountInput.value` directly and unchecked.
 
-**Spätere Bugs.** Die drei Probleme verstärken sich gegenseitig. Der Typ-Wechsel (Problem 1) macht das Verhalten von der Klick-Historie abhängig, die falsche Reihenfolge (Problem 2) entkoppelt Anzeige und Zustand, und die fehlende Validierung (Problem 3) kann den Zustand dauerhaft auf `NaN` setzen. Solche von der Reihenfolge abhängigen Fehler sind besonders schwer zu finden, weil sie nicht *immer* auftreten, sondern nur bei bestimmten Klick-Abfolgen – ein klassischer „funktioniert bei mir"-Bug.
-
-**Risiko im größeren System.** Genau dieses Muster – Werte mit unklarem Typ, Zustand der vor der Validierung verändert oder zu früh angezeigt wird – ist die Ursache realer, teurer Fehler: in Lagerverwaltung führt es zu falschen Beständen, in Buchungssystemen zu Doppelbuchungen oder negativen Kontingenten, in Finanzanwendungen direkt zu falschen Beträgen. Wenn UI, interner Zustand und Validierung nicht synchron laufen, kann man dem System nicht mehr vertrauen, und der Fehler pflanzt sich in alle abhängigen Komponenten fort (Coupling mit Seiteneffekten).
+**What actually happens:**
+With an empty field, `value` is an empty string `""`; with letters (e.g. `"abc"`) it becomes `NaN` as soon as a calculation happens. `NaN` then "infects" every subsequent calculation — `rations` becomes permanently `NaN` and cannot be repaired without reloading the page. Negative inputs are also accepted and invert the meaning of the buttons (eating a negative amount = adding).
 
 ---
 
-## 4. Mögliche Fixes
+## 3. Why It Matters
 
-- **Zahlen statt Strings speichern:** `let rations = 10;` statt `"10"`.
-- **Eingabe konvertieren und prüfen:** `const value = Number(amountInput.value);` und vor der Rechnung mit `Number.isNaN(value)` / `value > 0` validieren.
-- **Reihenfolge korrigieren:** Im *Eat*-Listener erst validieren, dann `rations` ändern, **danach** `updateStatus()` aufrufen. So bleibt die Anzeige immer mit dem echten Zustand synchron.
-- **Konsistenter Typ:** Wenn `rations` durchgehend ein `number` ist, verhalten sich `+` und `-` immer wie erwartet, unabhängig davon, welcher Button zuletzt gedrückt wurde.
+**User experience.** The tracker visibly delivers wrong numbers (`108` instead of `18`) and a display that lags behind the real state. The user makes decisions based on false information and loses trust in the application — for a rations tracker, the correct number is the application's only purpose.
 
-Korrigierte Kernlogik:
+**Later bugs.** The three problems reinforce one another. The type switching (Problem 1) makes the behavior dependent on click history, the wrong order (Problem 2) decouples display and state, and the missing validation (Problem 3) can set the state permanently to `NaN`. Such order-dependent bugs are especially hard to find because they don't occur *every* time, but only with certain click sequences — a classic "works on my machine" bug.
+
+**Risk in a larger system.** This exact pattern — values with an unclear type, state that is changed before validation or displayed too early — is the cause of real, expensive failures: in inventory management it leads to wrong stock levels, in booking systems to double bookings or negative quotas, in financial applications directly to wrong amounts. When UI, internal state, and validation are out of sync, the system can no longer be trusted, and the error propagates into all dependent components (coupling with side effects).
+
+---
+
+## 4. Possible Fixes
+
+- **Store numbers instead of strings:** `let rations = 10;` instead of `"10"`.
+- **Convert and validate input:** `const value = Number(amountInput.value);` and validate before calculating with `Number.isNaN(value)` / `value > 0`.
+- **Fix the order:** In the *Eat* listener, validate first, then change `rations`, and call `updateStatus()` **afterwards**. This keeps the display always in sync with the real state.
+- **Consistent type:** If `rations` is always a `number`, `+` and `-` behave as expected regardless of which button was pressed last.
+
+Corrected core logic:
 ```javascript
 let rations = 10;
 
@@ -110,16 +110,14 @@ eatButton.addEventListener("click", () => {
     return;
   }
   rations -= value;
-  updateStatus();   // erst Zustand ändern, dann anzeigen
+  updateStatus();   // change state first, then display
 });
 ```
-## 5. AI-Reflexion
 
-Wir haben die KI genutzt, um das Verhalten des Codes Zeile für Zeile durchzugehen und besonders die **„Warum"-Fragen** zu klären: warum `+` bei Strings konkateniert statt addiert, und warum `-` denselben Wert plötzlich in eine Zahl umwandelt (Type Coercion). Hilfreich war vor allem die Erklärung, dass der Datentyp von `rations` je nach zuletzt gedrücktem Button wechselt – diesen Zusammenhang hatten wir beim ersten Lesen nicht gesehen.
-
-Was wir kritisch prüfen mussten: Eine erste Erklärung reduzierte den *Eat*-Fehler nur auf „`updateStatus()` steht an der falschen Stelle" und übersah den eigentlichen Kern (den Typ-Wechsel und die fehlende Validierung). Den genauen Wert der String-Konkatenation (`"10" + "8" = "108"`) und das `NaN`-Verhalten haben wir selbst am laufenden Beispiel überprüft, statt der KI blind zu vertrauen. Die Entscheidung, welche Fehler tatsächlich „bedeutsam" im Sinne der Aufgabenstellung sind und wie wir sie priorisieren, lag bei uns.
 ---
 
+## 5. AI Reflection
 
+We used AI to walk through the code's behavior line by line and especially to clarify the **"why" questions**: why `+` concatenates strings instead of adding them, and why `-` suddenly converts the same value into a number (type coercion). The most helpful insight was the explanation that the data type of `rations` changes depending on the last button pressed — a connection we had not seen on first reading.
 
-
+What we had to check critically: an initial explanation reduced the *Eat* bug to merely "`updateStatus()` is in the wrong place" and overlooked the actual core (the type switching and the missing validation). We verified the exact result of the string concatenation (`"10" + "8" = "108"`) and the `NaN` behavior ourselves on the running example, rather than trusting the AI blindly. The decision about which bugs are genuinely "meaningful" in the sense of the assignment, and how we prioritize them, was ours.
