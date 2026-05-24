@@ -33,6 +33,3 @@ AI Assistance Reflection
 I used AI to better understand what each part of the code does. After identifying the errors, AI helped explain what exactly was wrong with the code, why the errors happened, and how the code could be corrected. 
 AI was especially helpful for understanding JavaScript rules, such as how strings and numbers are handled differently and why the order of code execution is important. It showed how even a small mistake can lead to incorrect results in the program. 
 Overall, AI was mainly used to answer the “why” questions during the error analysis. This helped improve my understanding of JavaScript and basic coding logic, even though the program itself was relatively small. 
-
-<img width="454" height="693" alt="image" src="https://github.com/user-attachments/assets/bdb567c5-dd08-45c4-bd3d-f35e1554aa6d" />
-
