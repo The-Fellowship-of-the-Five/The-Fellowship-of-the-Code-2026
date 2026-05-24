@@ -113,11 +113,13 @@ eatButton.addEventListener("click", () => {
   updateStatus();   // erst Zustand ändern, dann anzeigen
 });
 ```
-
----
-
 ## 5. AI-Reflexion
 
-Ich habe die KI genutzt, um das Verhalten des Codes Zeile für Zeile durchzugehen und besonders die **„Warum"-Fragen** zu klären: warum `+` bei Strings konkateniert statt addiert, und warum `-` denselben Wert plötzlich in eine Zahl umwandelt (Type Coercion). Hilfreich war vor allem die Erklärung, dass der Datentyp von `rations` je nach zuletzt gedrücktem Button wechselt – diesen Zusammenhang hatte ich beim ersten Lesen nicht gesehen.
+Wir haben die KI genutzt, um das Verhalten des Codes Zeile für Zeile durchzugehen und besonders die **„Warum"-Fragen** zu klären: warum `+` bei Strings konkateniert statt addiert, und warum `-` denselben Wert plötzlich in eine Zahl umwandelt (Type Coercion). Hilfreich war vor allem die Erklärung, dass der Datentyp von `rations` je nach zuletzt gedrücktem Button wechselt – diesen Zusammenhang hatten wir beim ersten Lesen nicht gesehen.
 
-Was ich kritisch prüfen musste: Eine erste Erklärung reduzierte den *Eat*-Fehler nur auf „`updateStatus()` steht an der falschen Stelle" und übersah den eigentlichen Kern (den Typ-Wechsel und die fehlende Validierung). Den genauen Wert der String-Konkatenation (`"10" + "8" = "108"`) und das `NaN`-Verhalten habe ich selbst am laufenden Beispiel überprüft, statt der KI blind zu vertrauen. Die Entscheidung, welche Fehler tatsächlich „bedeutsam" im Sinne der Aufgabenstellung sind und wie ich sie priorisiere, lag bei mir.
+Was wir kritisch prüfen mussten: Eine erste Erklärung reduzierte den *Eat*-Fehler nur auf „`updateStatus()` steht an der falschen Stelle" und übersah den eigentlichen Kern (den Typ-Wechsel und die fehlende Validierung). Den genauen Wert der String-Konkatenation (`"10" + "8" = "108"`) und das `NaN`-Verhalten haben wir selbst am laufenden Beispiel überprüft, statt der KI blind zu vertrauen. Die Entscheidung, welche Fehler tatsächlich „bedeutsam" im Sinne der Aufgabenstellung sind und wie wir sie priorisieren, lag bei uns.
+---
+
+
+
+
