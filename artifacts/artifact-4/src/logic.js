@@ -395,6 +395,11 @@ function renderTable(tableSelector, rows, resultType) {
 function updateFeasibilityScreens() {
     const recipe      = recipes[appState.selectedRecipe];
     const rows  = calculateComparison(sharedInventory);
+
+   // Decision Summary im Single-Modus ausblenden
+    getElements(".decision-summary").forEach(function (summaryCard) {
+        summaryCard.classList.toggle("hidden", appState.mode === "single");
+    });
    
     // Dynamische Texte
     getElement("#not-feasible-text").textContent =
