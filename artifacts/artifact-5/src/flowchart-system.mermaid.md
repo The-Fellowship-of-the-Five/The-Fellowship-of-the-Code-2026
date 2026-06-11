@@ -1,4 +1,4 @@
-#Mermaid Flowchart
+# Mermaid Flowchart
 
 ```mermaid
 flowchart TB
@@ -69,7 +69,7 @@ flowchart TB
 ```
 
 
-##Inventory Teil 
+## Inventory Teil 
 
 ```mermaid
 flowchart TB
