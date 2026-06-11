@@ -1,4 +1,5 @@
 #Mermaid Flowchart
+
 ```mermaid
 flowchart TB
     Start(["Open Meal Planning"]) --> Q{"Single meal or multi-day plan?"}
@@ -69,6 +70,7 @@ flowchart TB
 
 
 ##Inventory Teil 
+
 ```mermaid
 flowchart TB
     M1["Member 1"] -- reports ingredient --> INV[("Inventory")]
