@@ -2,7 +2,7 @@
 
 ## Automation (Microsoft Power Automate)
 
-Name: Quest Log for the Fellowship of the five  
+Name: Quest Log for the Fellowship of the Five  
 
 Trigger: A new Microsoft Forms response. Someone submits a quest through the form.  
 
@@ -16,6 +16,8 @@ Theme: The form acts as the Fellowship's quest log.
 2. The flow reads the quest name, the assigned member, the priority, and the notes.  
 3. Then the flow records the quest in the table in Excel.
 4. Each case matches one member of the Fellowship. The matching case emails that member with a prewritten text including the quest details.
+
+Link: [Quest Log for the Fellowship of the Five](https://forms.cloud.microsoft/e/GvtXMttYWz)
 
 Screenshots:
 - Flow diagram: 
