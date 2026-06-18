@@ -98,6 +98,14 @@ Go to Chapter V →
 ---
 
 ## Changelog:  
+  
+### [1.0.9] - 18.06.2026
+### Added
+ - Low Code Game
+ - Automatic flow
+ - Extending the Fellowship
+ - Forms for quests
+
 ### [1.0.8] - 25.05.2026
 ### Changed
  - Improved Reading the runes. Solved errors.
