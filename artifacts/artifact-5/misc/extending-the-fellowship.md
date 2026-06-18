@@ -2,35 +2,36 @@
 
 ## Automation (Microsoft Power Automate)
 
-Name: Quest Log of the Fellowship
+Name: Quest Log for the Fellowship of the five  
 
-Trigger: A new Microsoft Forms response. Someone submits a quest through the form.
+Trigger: A new Microsoft Forms response. Someone submits a quest through the form.  
 
-Outcome: The flow writes the quest to an Excel log in OneDrive and emails the Fellowship member chosen for the quest.
+Outcome: The flow writes the quest into an Excel in OneDrive and emails the Fellowship member chosen for the quest.  
 
-Theme: The form acts as the Fellowship's quest log. Each quest goes to one member: Frodo, Sam, Gandalf, Aragorn, or Legolas.
+Theme: The form acts as the Fellowship's quest log.
 
-How it works:
+### How it works:
 
-1. When a new response is submitted (Microsoft Forms). The flow starts on every form submission.
-2. Get response details. The flow reads the quest name, the assigned member, the priority, and the notes.
-3. Add a row into a table. The flow records the quest as a new row in the QuestLog table in OneDrive Excel.
-4. Switch on the assigned member. Each case matches one member of the Fellowship. The matching case emails that member the quest details. The Default case catches any other name.
-
-Runs on its own: After setup the flow needs no manual work. Every submission fires it, logs the quest, and emails the right member.
+1. A new response is submitted through Microsoft Forms.  
+2. The flow reads the quest name, the assigned member, the priority, and the notes.  
+3. Then the flow records the quest in the table in Excel.
+4. Each case matches one member of the Fellowship. The matching case emails that member with a prewritten text including the quest details.
 
 Screenshots:
-- Flow diagram: [insert screenshot]
-- One row in the Excel quest log: [insert screenshot]
-- One quest email: [insert screenshot]
+- Flow diagram: 
+<img width="1377" height="683" alt="image" src="https://github.com/user-attachments/assets/6a13d32c-74b9-4d86-856d-edccee9e8cd3" />
+  
+- Excel quest log: 
+<img width="1691" height="301" alt="image" src="https://github.com/user-attachments/assets/b11fa778-71a7-489d-b67a-d2b221bfff88" />
+  
+- Quest email: 
+<img width="549" height="417" alt="image" src="https://github.com/user-attachments/assets/9120194d-a6e6-40f6-89b9-04322427be2b" />
+  
+## Microsoft Arcade - small game
 
-## Low-code game (MakeCode Arcade)
+Name: Eldenhobbit
 
-Name: Eldenhobbit: Smaug's Hoard
+Link: [Eldenhobbit](https://makecode.com/_auD5dKTpeU8t)
 
-Link: [paste your MakeCode share link]
-
-A Lord of the Rings parody boss fight. You choose a hero on the start screen, Hobbit for melee or Wizard for ranged, then face Smaug. The dragon holds 500 HP, sweeps the screen with fans of fireballs, and fires telegraphed lasers you dodge by moving off the marked column. At half health Smaug pulls back to the top of the arena. Beat him, climb to the podium, and open the treasure hoard. A timer tracks your run, so a lower time means a better score. Lose all your hearts and the screen reads YOU DIED.
-
-Screenshot:
-- Boss fight: [insert screenshot]
+A Lord of the Rings and Eldenring parody boss fight. You choose a hero, either the Hobbit with melee attacks or the Wizard with ranged attacks on the start screen and then face Smaug.  
+The dragon has 500 HP, shoots fireballs, and attacks with fire-beams, getting intentionally harder the lower it HP is. Beat him, climb to the podium, and open the treasure.
