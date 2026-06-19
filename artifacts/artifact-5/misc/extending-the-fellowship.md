@@ -33,7 +33,7 @@ Screenshots:
 
 Name: Eldenhobbit
 
-Link: [Eldenhobbit](https://makecode.com/_8gDVD7ewtR3m)
+Link: [Eldenhobbit](https://makecode.com/_AKJJrwV94PD4)
 
 A Lord of the Rings and Eldenring parody boss fight. You choose a hero, either the Hobbit with melee attacks or the Wizard with ranged attacks on the start screen and then face Smaug.  
 The dragon has 500 HP, shoots fireballs, and attacks with fire-beams, getting intentionally harder the lower it HP is. Beat him, climb to the podium, and open the treasure.
