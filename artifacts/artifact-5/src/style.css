@@ -1,1 +1,277 @@
+/* ---------- Farb- und Layout-Token, abgeleitet aus dem Wireframe ---------- */
+:root {
+  --bg: #f3efe3;
+  --green: #2c4a28;
+  --green-dark: #1f3a1c;
+  --gold: #8a6d23;
+  --border: #ddd3bb;
+  --white: #ffffff;
+  --success-bg: #e1efd8;
+  --badge-bg: #ebeee0;
+  --text: #2b2b27;
+  --radius: 8px;
+}
 
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #ddd6c2;
+  font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color: var(--text);
+  display: flex;
+  justify-content: center;
+  padding: 24px 0;
+}
+
+/* ---------- Handy-Rahmen, hält alle Screens ----------
+   Feste Größe statt min-height: alle "Frames" sind gleich groß,
+   wachsen nicht mehr mit dem Inhalt, sondern scrollen ab dieser Höhe intern. */
+.phone {
+  width: 380px;
+  height: 720px;
+  background: var(--bg);
+  border-radius: 28px;
+  padding: 28px 22px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.screen { display: none; }
+.screen.active { display: block; }
+
+/* ---------- Typografie ---------- */
+h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--green);
+  font-size: 26px;
+  margin: 6px 0 2px;
+}
+
+.subtitle {
+  color: var(--gold);
+  font-weight: 600;
+  margin: 0 0 18px;
+}
+
+.label {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gold);
+  margin: 18px 0 8px;
+}
+
+.hint {
+  font-size: 12px;
+  color: var(--gold);
+  margin: 8px 0;
+}
+
+/* ---------- Home-Screen ---------- */
+#screen-home { text-align: center; padding-top: 50px; }
+.logo {
+  font-family: Georgia, serif;
+  font-size: 42px;
+  letter-spacing: 4px;
+  color: var(--green);
+  margin-bottom: 10px;
+}
+.logo-divider {
+  width: 140px;
+  height: 1px;
+  background: var(--green);
+  margin: 0 auto 14px;
+}
+.logo-sub {
+  color: var(--gold);
+  letter-spacing: 3px;
+  font-size: 11px;
+  text-transform: uppercase;
+  margin-bottom: 60px;
+}
+
+/* ---------- Buttons & Links ---------- */
+.btn {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  border-radius: var(--radius);
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 12px;
+  border: 2px solid transparent;
+}
+.btn-primary { background: var(--green); color: var(--white); }
+.btn-primary:hover { background: var(--green-dark); }
+.btn-outline { background: transparent; color: var(--green); border-color: var(--green); }
+
+.back, .link-btn, .icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+.back { color: var(--green); font-size: 14px; padding: 0 0 10px; display: block; }
+.link-btn { color: var(--gold); font-size: 12px; }
+.icon-btn { color: var(--text); font-size: 16px; }
+
+/* ---------- Formularfelder ---------- */
+.row-between { display: flex; justify-content: space-between; align-items: center; }
+.row-end { display: flex; justify-content: flex-end; }
+.row { display: flex; gap: 12px; }
+.row > div { flex: 1; }
+
+input[type="text"], input[type="number"], select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--white);
+  font-size: 14px;
+}
+.search { margin: 4px 0 14px; }
+select:disabled { background: #ece8da; color: var(--gold); cursor: not-allowed; }
+
+/* ---------- Product-Name-Dropdown (funktioniert wie die Suchleisten-Filterung) ---------- */
+.autocomplete-wrap { position: relative; }
+.autocomplete-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  list-style: none;
+  margin: 2px 0 0;
+  padding: 0;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  max-height: 160px;
+  overflow-y: auto;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+.autocomplete-list li {
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.autocomplete-list li:hover { background: var(--success-bg); }
+
+/* ---------- Item-Listen (Inventory, Pending, Recently Added) ---------- */
+.item-list { list-style: none; margin: 0; padding: 0; }
+.item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.item-qty { color: var(--gold); font-weight: 600; }
+
+/* Eigene Spalten-Aufteilung für die "Added for this update"-Liste:
+   3 feste Spalten statt flex space-between, damit Menge und ✕
+   bei jeder Zeile exakt untereinander stehen, egal wie lang der Name ist. */
+.pending-row {
+  display: grid;
+  grid-template-columns: 1fr 70px 22px;
+  align-items: center;
+  column-gap: 8px;
+}
+.pending-row .item-qty { text-align: right; }
+.pending-row .remove-btn { justify-self: end; }
+
+.badge {
+  background: var(--badge-bg);
+  color: var(--green);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 10px;
+  margin-left: 6px;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  color: #a8453f;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* ---------- Erfolgs-Banner ---------- */
+.banner {
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 600;
+  margin: 10px 0;
+}
+.banner.success { background: var(--success-bg); color: var(--green-dark); }
+
+/* ---------- Tabellen (Review & Adjust) ---------- */
+.data-table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+.data-table th {
+  text-align: left;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding-bottom: 6px;
+}
+.data-table td { padding: 8px 4px; border-bottom: 1px solid var(--border); }
+.data-table input[type="number"] { width: 50px; padding: 6px 4px; }
+.data-table input[type="text"] { padding: 6px; font-size: 13px; }
+.data-table select { width: 60px; padding: 6px 2px; font-size: 13px; }
+
+/* ---------- Adjust-Modal ---------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal {
+  background: var(--bg);
+  width: 340px;
+  max-height: 560px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.hidden { display: none !important; }
+
+/* ---------- Eigene Scrollbar passend zum Stil (statt der grauen System-Leiste) ---------- */
+.phone, .modal, .autocomplete-list {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: var(--gold) transparent; /* Firefox: Daumen / Spur */
+}
+.phone::-webkit-scrollbar,
+.modal::-webkit-scrollbar,
+.autocomplete-list::-webkit-scrollbar {
+  width: 6px;
+}
+.phone::-webkit-scrollbar-track,
+.modal::-webkit-scrollbar-track,
+.autocomplete-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+.phone::-webkit-scrollbar-thumb,
+.modal::-webkit-scrollbar-thumb,
+.autocomplete-list::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 10px;
+}
+.phone::-webkit-scrollbar-thumb:hover,
+.modal::-webkit-scrollbar-thumb:hover,
+.autocomplete-list::-webkit-scrollbar-thumb:hover {
+  background: var(--green);
+}
