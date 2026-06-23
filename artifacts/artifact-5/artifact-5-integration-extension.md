@@ -97,21 +97,17 @@ The same index also powers the product-name autocomplete in the Add screen. If t
 
 ## Design Rationale
 
-### How the integrated system still reflects the original intent and value
+### How the integrated system still reflects the original intent and value?
+From Phase 1, our core intent was to reduce the cognitive load on Sam and prevent chaotic, error-prone manual tracking in harsh, stressful environments. The integrated system stays entirely true to this vision. By providing a single, reliable "Home" screen, the user has a centralized entry point with clear options for "Meal Planning" and "Shared Inventory". We also ensured that the system only communicates in a meaningful, contextual way. By adding thematic, lore-friendly validation alerts—such as warning the user about "Garstige leere Felder" when trying to add items without a quantity—the interface remains engaging while having strict data hygiene.  
 
-Assignment 1 defined the intent as giving the Fellowship the information they need to make quiet, fast decisions. Adding the inventory screen makes the data foundation visible instead of hidden, so the user can see and maintain what the comparison later depends on. The fuzzy search keeps that maintenance fast and forgiving, which is exactly the kind of low-friction interaction the original concept called for.
+### How individual slices connect meaningfully?
+The two capabilities—Recipe-Based Deficit Calculation (Meal Planning) and Inventory Management (Shared Inventory)—are conceptually interdependent. Meal Planning cannot function without an accurate baseline of supplies. The Shared Inventory acts as the foundational data layer. We added the "Shared Inventory" slice to demonstrate how the user feeds the exact state (the available ingredients) into the system. The overarching system wireframe connects them logically through the central Home screen dashboard, establishing a clear hierarchy.  
 
-### How individual slices connect meaningfully
-
-Inventory Tracking provides the data. Meal Planning consumes it and produces a decision. Each slice has a clear role and a clear dependency: the comparison cannot run without the inventory, and the inventory has a purpose because the comparison uses it. The system flowchart makes that one-directional dependency explicit.
-
-### Why the chosen extension makes sense
-
-We picked a library over an API because the most real friction in an inventory is finding and entering items correctly, not external data. Fuse.js affects behavior (tolerant matching, duplicate prevention through suggestions) rather than looks, and it attaches to an existing capability instead of starting a new one. That fits the assignment constraint precisely.
+### Why the chosen extension makes sense?
+We integrated Fuse.js, a lightweight fuzzy-search library, as our extension. We used this library for the inventory search functionality and the autocomplete dropdown. In a stressful travel scenario, typing errors are inevitable. Without fuzzy search, the system would treat typos as entirely new items, leading to fragmented inventory lists. By implementing Fuse.js with a error tolerance, the system intuitively guides the user to existing database entries despite spelling errors. This is not a visual gimmick; it is a critical behavioral upgrade that actively protects the logic and data integrity of the entire application.  
 
 ### What we intentionally did not build
-
-- **The link between the two capabilities is conceptual, not wired in code.** The inventory and meal planning live in the same system and flowchart, but we did not merge the two codebases into one running app for this snapshot.
-- **No persistence.** The inventory resets on reload. `confirm update` and `save changes` change the in-memory state only, nothing is stored or synced.
-- **No real per-member attribution.** Assignment 1 imagined each item belonging to a member. We kept a single shared list for this snapshot and left member tagging out.
-- **The remaining capabilities** (shopping lists, load distribution, threat map, alerts, task tracker) stay out of scope, as intended.
+Following the principle of "clarity over completeness", we intentionally left out several aspects:
+A true backend/database: The inventory state still resets on a page reload because it lives entirely within an array in the client's memory  
+Deep linking of the two interfaces: While the Home screen conceptually links both capabilities, clicking the Meal Planning button in this specific implementation only triggers a conceptual alert rather than loading Artifact 4. We focused on demonstrating the integration pattern rather than merging thousands of lines of code.  
+Complex User Roles: We assumed for this prototype that the device is solely operated by the Quartermaster, so we did not add permission logic to differentiate between users who can edit versus those who can only view.
