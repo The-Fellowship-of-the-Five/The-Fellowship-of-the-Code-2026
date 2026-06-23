@@ -1,1 +1,123 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LoTs – Shared Inventory</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<div class="phone">
+
+  <!-- HOME: Einstiegspunkt, zeigt wo die Capability im System lebt -->
+  <section class="screen active" id="screen-home">
+    <h1 class="logo">LoTs</h1>
+    <div class="logo-divider"></div>
+    <p class="logo-sub">The Fellowship Companion</p>
+    <button class="btn btn-primary" id="button-meal-planning">Meal Planning</button>
+    <button class="btn btn-primary" id="button-to-shared-inventory">Shared Inventory</button>
+    <p class="hint">⚑ This will update the shared group inventory.</p>
+  </section>
+
+  <!-- SHARED INVENTORY: Übersicht über alle Items -->
+  <section class="screen" id="screen-inventory">
+    <button class="back" data-nav="screen-home">‹ Home</button>
+    <h1>Shared Inventory</h1>
+    <p class="subtitle">Used by Meal Planning</p>
+
+    <div class="row-end">
+      <button class="link-btn" id="button-adjust">Adjust ⚙</button>
+    </div>
+    <input type="text" class="search" id="search-main" placeholder="Search Inventory">
+
+    <div class="banner success hidden" id="banner-updated"></div>
+
+    <div class="hidden" id="recently-added-section">
+      <p class="label">Recently Added</p>
+      <ul class="item-list" id="recently-added-list"></ul>
+    </div>
+
+    <p class="label">All Inventory Items</p>
+    <ul class="item-list" id="inventory-list"></ul>
+
+    <button class="btn btn-primary" id="button-start-add-ingredients">Add Ingredients</button>
+  </section>
+
+  <!-- ADD INGREDIENTS: neue Mengen für ein Update sammeln -->
+  <section class="screen" id="screen-add">
+    <button class="back" id="button-cancel-add-ingredients">‹ Back</button>
+    <h1>Add Ingredients</h1>
+    <p class="subtitle">Enter ingredient details</p>
+
+    <label class="label" for="input-name">Product Name</label>
+    <div class="autocomplete-wrap">
+      <input type="text" id="input-name" placeholder="e.g. Carrots" autocomplete="off">
+      <ul class="autocomplete-list hidden" id="name-suggestions"></ul>
+    </div>
+
+    <div class="row">
+      <div>
+        <label class="label" for="input-quantity">Quantity</label>
+        <input type="number" id="input-quantity" min="0.1" step="0.1">
+      </div>
+      <div>
+        <label class="label" for="input-unit">Unit</label>
+        <select id="input-unit">
+          <option>pcs</option>
+          <option>pks</option>
+          <option>g</option>
+          <option>kg</option>
+          <option>l</option>
+          <option>ml</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="btn btn-outline" id="button-add-to-pending-list">Add Ingredients</button>
+    <p class="hint">⚑ Items are not added to group inventory until confirmed</p>
+
+    <p class="label">Added for this update</p>
+    <ul class="item-list" id="pending-list"></ul>
+
+    <button class="btn btn-primary" id="button-to-review-items">Review Ingredients</button>
+  </section>
+
+  <!-- REVIEW ITEMS: letzte Kontrolle vor dem Update -->
+  <section class="screen" id="screen-review">
+    <button class="back" data-nav="screen-add">‹ Back</button>
+    <h1>Review Items</h1>
+    <p class="subtitle">Check before confirming</p>
+
+    <table class="data-table">
+      <thead><tr><th>Ingredient</th><th>Qty</th><th>Unit</th></tr></thead>
+      <tbody id="review-body"></tbody>
+    </table>
+
+    <p class="hint">⚑ This will update the shared group inventory.</p>
+    <button class="btn btn-primary" id="button-confirm-update">Confirm Update</button>
+    <button class="btn btn-outline" id="button-edit-ingredients">Edit Ingredients</button>
+  </section>
+
+</div>
+
+<!-- ADJUST-MODAL: bestehende Mengen direkt überschreiben, ohne Review-Schritt -->
+<div class="modal-overlay hidden" id="modal-adjust">
+  <div class="modal">
+    <div class="row-between">
+      <span class="label">All Inventory Items</span>
+      <button class="icon-btn" id="button-close-adjust-modal">✕</button>
+    </div>
+    <input type="text" class="search" id="search-modal" placeholder="Search Inventory">
+    <table class="data-table">
+      <thead><tr><th>Ingredient</th><th>Qty</th><th>Unit</th><th></th></tr></thead>
+      <tbody id="adjust-body"></tbody>
+    </table>
+    <button class="btn btn-primary" id="button-save-changes">Save Changes</button>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/7.0.0/fuse.min.js"></script>
+<script src="logic.js"></script>
+</body>
+</html>
