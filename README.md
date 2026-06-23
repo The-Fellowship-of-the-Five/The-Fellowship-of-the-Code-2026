@@ -70,7 +70,7 @@ Go to Chapter IV → [When Things React](https://github.com/The-Fellowship-of-th
 5. **Chapter V - The Tale Continues**  
    *“The tale grew in the telling.” - Bilbo*
 
-Go to Chapter V →
+Go to Chapter V → [The Tale Continues](https://github.com/The-Fellowship-of-the-Five/The-Fellowship-of-the-Code-2026/blob/main/chapters/Chapter%20V%20%20-%20The%20Tale%20Continues.md)
 
 ---
 
@@ -98,6 +98,11 @@ Go to Chapter V →
 ---
 
 ## Changelog:  
+
+### [1.1.0] - 23.06.2026
+### Added
+- Artifact 5 added: Integration & Extension (Inventory Tracking + Fuse.js search).
+- Red Book Chapter V added: The Tale Continues.
   
 ### [1.0.9] - 18.06.2026
 ### Added
