@@ -108,6 +108,6 @@ We integrated Fuse.js, a lightweight fuzzy-search library, as our extension. We 
 
 ### What we intentionally did not build
 Following the principle of "clarity over completeness", we intentionally left out several aspects:
-A true backend/database: The inventory state still resets on a page reload because it lives entirely within an array in the client's memory  
-Deep linking of the two interfaces: While the Home screen conceptually links both capabilities, clicking the Meal Planning button in this specific implementation only triggers a conceptual alert rather than loading Artifact 4. We focused on demonstrating the integration pattern rather than merging thousands of lines of code.  
-Complex User Roles: We assumed for this prototype that the device is solely operated by the Quartermaster, so we did not add permission logic to differentiate between users who can edit versus those who can only view.
+- A true backend/database: The inventory state still resets on a page reload because it lives entirely within an array in the client's memory  
+- Deep linking of the two interfaces: While the Home screen conceptually links both capabilities, clicking the Meal Planning button in this specific implementation only triggers a conceptual alert rather than loading Artifact 4. We focused on demonstrating the integration pattern rather than merging thousands of lines of code.  
+- Complex User Roles: We assumed for this prototype that the device is solely operated by the Quartermaster, so we did not add permission logic to differentiate between users who can edit versus those who can only view.
