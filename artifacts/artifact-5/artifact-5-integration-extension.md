@@ -22,7 +22,7 @@ The system flow is simple: Inventory Tracking collects and shows the group's res
 
 **File:** [flowchart-system.mermaid.md](https://github.com/The-Fellowship-of-the-Five/The-Fellowship-of-the-Code-2026/blob/main/artifacts/artifact-5/src/flowchart-system.mermaid.md)
 
-The system-level flowchart shows how the two capabilities hang together: members feed the shared inventory, the inventory feeds the meal planning comparison, and the comparison returns a feasible or not-feasible result. This is not a detailed interaction flow, it answers how the parts connect.
+The system-level flowchart shows how the two capabilities hang together, members feed the shared inventory, the inventory feeds the meal planning comparison, and the comparison returns a feasible or not-feasible result. This is not a detailed interaction flow, it answers how the parts connect.
 
 ---
 
@@ -30,7 +30,7 @@ The system-level flowchart shows how the two capabilities hang together: members
 
 **File:** [wireframe-system.png](https://github.com/The-Fellowship-of-the-Five/The-Fellowship-of-the-Code-2026/blob/main/artifacts/artifact-5/src/wireframe-system.png)
 
-The wireframe shows where the new inventory capability lives and how a user moves through it. From the home screen the user can reach either Meal Planning (the existing slice) or Shared Inventory (the new one). Inside the inventory the user can search the current items, start an "Add Ingredients" round, review a draft before confirming, or open an "Adjust" view to correct existing quantities directly.
+The wireframe shows where the new inventory capability lives and how a user moves through it. From the home screen the user can reach either Meal Planning (the existing slice - which here is currently disabled) or Shared Inventory (the new and live one). Inside the inventory the user can search the current items, start an "Add Ingredients" round, review a draft before confirming, or open an "Adjust" view to correct existing quantities directly.
 
 ---
 
